@@ -3051,8 +3051,8 @@ select.input {
         </div>
       </div>
 
-      <!-- خروج + مسح -->
-      <div class="grid-2" style="margin-top:6px">
+      <!-- خروج + مسح — مسح البيانات للبلدية فقط، خروج للجميع -->
+      <div class="grid-2" style="margin-top:6px" data-admin-level="local">
         <button class="btn btn-danger ripple" onclick="logoutAdmin()">
           <i class="fas fa-sign-out-alt"></i> خروج
         </button>
@@ -3060,6 +3060,10 @@ select.input {
           <i class="fas fa-exclamation-triangle"></i> مسح البيانات
         </button>
       </div>
+      <!-- زر خروج للحكومة والولاية فقط -->
+      <button id="govLogoutBtn" class="btn btn-danger ripple" onclick="logoutAdmin()" style="display:none;margin-top:6px;width:100%">
+        <i class="fas fa-sign-out-alt"></i> خروج
+      </button>
     </div>
     <button class="btn ripple" style="background:#757575" onclick="showPage('home')">
       <i class="fas fa-arrow-right"></i> <span data-i18n="back">رجوع</span>
@@ -4878,13 +4882,28 @@ function selectAdminLevel(level) {
       openWilayaPicker('commune', (w) => {
         adminWilaya   = w;
         currentWilaya = w;
-        // بعد اختيار الولاية افتح اختيار البلدية
         setTimeout(() => {
           openCommunePicker(w, (c) => {
             adminCommune   = c;
             currentCommune = c;
-            // بعد اختيار البلدية اذهب لتسجيل الدخول
-            setTimeout(() => { selectRole('admin'); }, 250);
+            // دخول مباشر لصفحة تسجيل الدخول بدون إعادة تشغيل
+            setTimeout(() => {
+              const main = document.getElementById('mainContent');
+              const sel  = document.getElementById('deviceSelector');
+              if(sel)  { sel.style.display='none'; sel.classList.remove('active'); }
+              if(main) { main.style.display='block'; main.classList.add('active'); }
+              currentRole = 'admin';
+              _startApp('desktop');
+              const loginDiv = document.getElementById('adminLogin');
+              const panelDiv = document.getElementById('adminPanel');
+              if(loginDiv) loginDiv.classList.remove('hidden');
+              if(panelDiv) panelDiv.classList.add('hidden');
+              const an = document.getElementById('adminName');
+              const ac = document.getElementById('adminCode');
+              if(an) an.value = '';
+              if(ac) ac.value = '';
+              showPage('admin');
+            }, 250);
           });
         }, 250);
       });
@@ -5574,29 +5593,32 @@ function applyAdminLevelUI() {
   const isNational = adminLevel === 'national';
   const isWilaya   = adminLevel === 'wilaya';
   const isCommune  = adminLevel === 'commune';
-  const isLocal    = isWilaya || isCommune; // ولاية أو بلدية
 
-  // ===== 1. العناصر المحلية البحتة (تنبيهات، سائقون، متابعة ميدانية...) =====
-  // تُخفى للحكومة والولاية — تظهر للبلدية فقط
+  // العناصر المحلية: تظهر للبلدية فقط
   document.querySelectorAll('[data-admin-level="local"]').forEach(el => {
     el.style.display = isCommune ? '' : 'none';
   });
 
-  // ===== 2. لوحات الإحصاء =====
+  // زر الخروج للحكومة والولاية
+  const govLogout = document.getElementById('govLogoutBtn');
+  if(govLogout) govLogout.style.display = (isNational || isWilaya) ? 'block' : 'none';
+
+  // لوحات الإحصاء
   const natPanel = document.getElementById('nationalStatsPanel');
   const wlyPanel = document.getElementById('wilayaStatsPanel');
 
   if(isNational) {
     if(natPanel) { natPanel.style.display = 'block'; switchGovTab(1); }
     if(wlyPanel) wlyPanel.style.display = 'none';
-
   } else if(isWilaya) {
-    // الولاية: تُظهر wilayaStatsPanel وتُخفي national
     if(natPanel) natPanel.style.display = 'none';
-    if(wlyPanel) { wlyPanel.style.display = 'block'; loadWilayaTotalStats(); }
-
+    if(wlyPanel) {
+      wlyPanel.style.display = 'block';
+      const pname = document.getElementById('wilayaPanelName');
+      if(pname) pname.textContent = adminWilaya ? adminWilaya.name : '';
+      loadWilayaTotalStats();
+    }
   } else {
-    // البلدية: لا إحصاء وطني أو ولائي
     if(natPanel) natPanel.style.display = 'none';
     if(wlyPanel) wlyPanel.style.display = 'none';
   }
