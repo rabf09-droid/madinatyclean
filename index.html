@@ -2117,7 +2117,7 @@ select.input {
     </div>
 
     <input type="text" id="communeNameInput"
-      placeholder="مثال: تاكو / مرج التكبير / قصر البخاري..."
+      placeholder="اكتب اسم بلديتك بالعربية..."
       style="width:100%;padding:12px 14px;border:2px solid #E65100;border-radius:12px;
         font-family:Cairo,sans-serif;font-size:0.95rem;direction:rtl;
         margin-bottom:14px;outline:none"
@@ -3858,51 +3858,122 @@ function normalizeReport(r) {
 // ===== نظام الأدوار =====
 var currentRole = 'citizen';
 
+// ===== الدخول المركزي — يعمل لكل الأدوار =====
+function goToApp(role, page) {
+  // 1. أخفِ شاشة الاختيار فوراً ونهائياً
+  var sel = document.getElementById('deviceSelector');
+  if(sel) {
+    sel.style.opacity = '0';
+    sel.style.display = 'none';
+    sel.classList.remove('active');
+  }
+
+  // 2. أظهر المحتوى الرئيسي فوراً
+  var main = document.getElementById('mainContent');
+  if(main) {
+    main.style.display = 'block';
+    main.classList.add('active');
+  }
+
+  // 3. أخفِ splash
+  var spl = document.getElementById('splash');
+  if(spl) spl.style.display = 'none';
+
+  // 4. وضع الجهاز
+  var mode = (role === 'admin') ? 'desktop' : 'mobile';
+  try {
+    if(mode === 'desktop') document.body.classList.add('desktop-mode');
+    else document.body.classList.remove('desktop-mode');
+  } catch(e){}
+
+  // 5. تهيئة خفيفة
+  try { updateTime(); } catch(e){}
+  try {
+    loadFromCloud('reports','reports',function(d){
+      allReports = d ? Object.values(d).map(normalizeReport) : [];
+      try { updateStats(); } catch(e){}
+    });
+  } catch(e){}
+  try {
+    loadFromCloud('staff','staff',function(d){
+      if(d){var arr=Array.isArray(d)?d:Object.values(d);localStorage.setItem('medea_staff',JSON.stringify(arr));}
+    });
+  } catch(e){}
+  try { applyRoleUI(); } catch(e){}
+
+  // 6. اذهب للصفحة — مع تأخير صغير لضمان ظهور mainContent
+  setTimeout(function() {
+    // تأكيد إخفاء deviceSelector مرة ثانية
+    var s = document.getElementById('deviceSelector');
+    if(s) { s.style.display='none'; s.classList.remove('active'); }
+    // إظهار الصفحة المطلوبة
+    try {
+      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+      var target = document.getElementById(page || 'home');
+      if(target) {
+        target.classList.add('active');
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+    } catch(e){}
+    // تهيئة خاصة
+    try {
+      if(page === 'driver') renderDriverPage && renderDriverPage();
+    } catch(e){}
+  }, 150);
+}
+
 function selectRole(role) {
   currentRole = role;
   try { localStorage.setItem('medea_role', role); } catch(e) {}
-  try { localStorage.removeItem('medea_device'); } catch(e) {}
-  var deviceMode = (role === 'admin') ? 'desktop' : 'mobile';
+
   var sel = document.getElementById('deviceSelector');
-  if(sel) { sel.style.opacity='0'; sel.style.transition='opacity 0.4s'; }
+  if(sel) { sel.style.opacity='0'; sel.style.transition='opacity 0.3s'; }
 
   setTimeout(function() {
-    if(sel) { sel.style.display='none'; sel.classList.remove('active'); }
+    if(role === 'citizen') {
+      goToApp('citizen', 'home');
+      // GPS في الخلفية
+      detectAndSetCommune('citizen').catch(function(){});
 
-    if(role === 'driver') {
-      _startApp('mobile');
-      setTimeout(function(){ showPage('driver'); }, 400);
-      // تحديد البلدية في الخلفية بدون انتظار
+    } else if(role === 'driver') {
+      goToApp('driver', 'driver');
+      // GPS في الخلفية — إذا فشل تظهر النافذة
       detectAndSetCommune('driver').then(function(ok){
         if(!ok || !currentCommune) showDriverCommuneSelector();
       }).catch(function(){ showDriverCommuneSelector(); });
 
     } else if(role === 'admin') {
-      _startApp(deviceMode);
-      var adminLoginDiv = document.getElementById('adminLogin');
-      var adminPanelDiv = document.getElementById('adminPanel');
-      if(adminLoginDiv) adminLoginDiv.classList.remove('hidden');
-      if(adminPanelDiv) adminPanelDiv.classList.add('hidden');
+      // إظهار صفحة تسجيل دخول البلدية
+      goToApp('admin', 'admin');
+      var loginDiv = document.getElementById('adminLogin');
+      var panelDiv = document.getElementById('adminPanel');
+      if(loginDiv) loginDiv.classList.remove('hidden');
+      if(panelDiv) panelDiv.classList.add('hidden');
       var an = document.getElementById('adminName');
       var ac = document.getElementById('adminCode');
       if(an) an.value = '';
       if(ac) ac.value = '';
-      setTimeout(function(){ showPage('admin'); }, 400);
-
-    } else {
-      // مواطن — يدخل فوراً ثم تحديد البلدية في الخلفية
-      var spl = document.getElementById('splash');
-      if(spl) { spl.style.display='flex'; spl.style.opacity='1'; }
-      _startApp(deviceMode);
-      showPage('home');
-      // تحديد البلدية في الخلفية
-      detectAndSetCommune('citizen').catch(function(){});
-      // إخفاء splash بعد ثانية
-      setTimeout(function(){
-        if(spl) { spl.style.display='none'; }
-      }, 1500);
     }
   }, 300);
+}
+
+// ===== دخول الحكومة والولاية مباشرة =====
+function _openAdminPanelDirect(label) {
+  currentAdminName = label;
+  currentRole = 'admin';
+  goToApp('admin', 'admin');
+  var loginDiv = document.getElementById('adminLogin');
+  var panelDiv = document.getElementById('adminPanel');
+  if(loginDiv) loginDiv.classList.add('hidden');
+  if(panelDiv) panelDiv.classList.remove('hidden');
+  var cu = document.getElementById('adminCurrentUser');
+  if(cu) cu.textContent = label;
+  var settings = document.getElementById('adminSettingsSection');
+  if(settings) settings.style.display = 'none';
+  try { applyAdminLevelUI(); } catch(e){}
+  try { updateAdminLevelBadge(); } catch(e){}
+  try { applyRoleUI(); } catch(e){}
+  try { showToast('✓ ' + label, 'success'); } catch(e){}
 }
 
 function applyRoleUI() {
@@ -4850,16 +4921,30 @@ function sendReport() {
 // ============================================================
 
 function showAdminLevelSelector() {
-  document.getElementById('adminLevelModal').style.display = 'flex';
+  // أخفِ deviceSelector أولاً
+  var sel = document.getElementById('deviceSelector');
+  if(sel) { sel.style.opacity='0'; }
+  setTimeout(function() {
+    if(sel) { sel.style.display='none'; sel.classList.remove('active'); }
+    var modal = document.getElementById('adminLevelModal');
+    if(modal) modal.style.display = 'flex';
+  }, 200);
 }
 function closeAdminLevelModal() {
-  document.getElementById('adminLevelModal').style.display = 'none';
+  var modal = document.getElementById('adminLevelModal');
+  if(modal) modal.style.display = 'none';
 }
 
 function selectAdminLevel(level) {
   adminLevel = level;
-  // أغلق نافذة اختيار المستوى أولاً
-  closeAdminLevelModal();
+
+  // أخفِ deviceSelector فوراً ونهائياً
+  var sel = document.getElementById('deviceSelector');
+  if(sel) { sel.style.display='none'; sel.classList.remove('active'); sel.style.opacity='0'; }
+
+  // أغلق نافذة اختيار المستوى
+  var lvlModal = document.getElementById('adminLevelModal');
+  if(lvlModal) lvlModal.style.display = 'none';
 
   if(level === 'national') {
     currentWilaya  = null;
@@ -4867,72 +4952,45 @@ function selectAdminLevel(level) {
     _openAdminPanelDirect('🇩🇿 لوحة الحكومة — وطني');
 
   } else if(level === 'wilaya') {
-    // انتظر قليلاً ريثما تُغلق النافذة ثم افتح اختيار الولاية
-    setTimeout(() => {
-      openWilayaPicker('wilaya', (w) => {
+    setTimeout(function() {
+      openWilayaPicker('wilaya', function(w) {
         adminWilaya    = w;
         currentWilaya  = w;
         currentCommune = null;
         _openAdminPanelDirect('🏢 ولاية ' + w.name);
       });
-    }, 250);
+    }, 150);
 
   } else if(level === 'commune') {
-    setTimeout(() => {
-      openWilayaPicker('commune', (w) => {
+    setTimeout(function() {
+      openWilayaPicker('commune', function(w) {
         adminWilaya   = w;
         currentWilaya = w;
-        setTimeout(() => {
-          openCommunePicker(w, (c) => {
+        setTimeout(function() {
+          openCommunePicker(w, function(c) {
             adminCommune   = c;
             currentCommune = c;
-            // دخول مباشر لصفحة تسجيل الدخول بدون إعادة تشغيل
-            setTimeout(() => {
-              const main = document.getElementById('mainContent');
-              const sel  = document.getElementById('deviceSelector');
-              if(sel)  { sel.style.display='none'; sel.classList.remove('active'); }
-              if(main) { main.style.display='block'; main.classList.add('active'); }
+            setTimeout(function() {
               currentRole = 'admin';
-              _startApp('desktop');
-              const loginDiv = document.getElementById('adminLogin');
-              const panelDiv = document.getElementById('adminPanel');
+              goToApp('admin', 'admin');
+              var loginDiv = document.getElementById('adminLogin');
+              var panelDiv = document.getElementById('adminPanel');
               if(loginDiv) loginDiv.classList.remove('hidden');
               if(panelDiv) panelDiv.classList.add('hidden');
-              const an = document.getElementById('adminName');
-              const ac = document.getElementById('adminCode');
+              var an = document.getElementById('adminName');
+              var ac = document.getElementById('adminCode');
               if(an) an.value = '';
               if(ac) ac.value = '';
-              showPage('admin');
-            }, 250);
+            }, 150);
           });
-        }, 250);
+        }, 150);
       });
-    }, 250);
+    }, 150);
   }
 }
 
 // ===== دخول مباشر بدون رمز (حكومة وولاية) =====
-function _openAdminPanelDirect(label) {
-  currentAdminName = label;
-  currentRole = 'admin'; // ← مهم لـ applyRoleUI
-  _startApp('desktop');
-  const sel = document.getElementById('deviceSelector');
-  if(sel) { sel.style.display='none'; sel.classList.remove('active'); }
-  const spl = document.getElementById('splash');
-  if(spl) spl.style.display='none';
-  const loginDiv = document.getElementById('adminLogin');
-  const panelDiv = document.getElementById('adminPanel');
-  if(loginDiv) loginDiv.classList.add('hidden');
-  if(panelDiv) panelDiv.classList.remove('hidden');
-  document.getElementById('adminCurrentUser').textContent = label;
-  const settings = document.getElementById('adminSettingsSection');
-  if(settings) settings.style.display = 'none';
-  applyAdminLevelUI();
-  updateAdminLevelBadge();
-  applyRoleUI(); // ← يحدّث الشارة العلوية بالاسم الصحيح
-  showPage('admin');
-  showToast('✓ ' + label, 'success');
-}
+
 
 // ===== Wilaya Picker =====
 let _wilayaPickerCallback = null;
@@ -4974,8 +5032,14 @@ function renderWilayaList(list) {
 function pickWilaya(code) {
   const w = ALGERIA_WILAYAS.find(x => x.code === code);
   if(!w) return;
-  closeWilayaPicker();
-  if(_wilayaPickerCallback) _wilayaPickerCallback(w);
+  // أغلق نافذة الولايات
+  const modal = document.getElementById('wilayaPickerModal');
+  if(modal) modal.style.display = 'none';
+  // احتفظ بالـ callback قبل تصفيره
+  const cb = _wilayaPickerCallback;
+  _wilayaPickerCallback = null;
+  // استدعِ الـ callback بعد تأخير صغير
+  if(cb) setTimeout(function(){ cb(w); }, 100);
 }
 
 // ===== Commune Picker — إدخال نصي مع حفظ تلقائي =====
@@ -5028,19 +5092,18 @@ function confirmCommuneInput() {
     return;
   }
 
-  // حفظ البلدية في Firebase مرتبطة بالولاية
+  // حفظ في Firebase و localStorage
   if(_communePickerWilaya) {
-    try {
-      db.ref(`wilayas_communes/${_communePickerWilaya.code}`).set(val).catch(()=>{});
-    } catch(e){}
-    // حفظ محلي احتياطي
-    try {
-      localStorage.setItem(`commune_${_communePickerWilaya.code}`, val);
-    } catch(e){}
+    try { db.ref('wilayas_communes/'+_communePickerWilaya.code).set(val).catch(function(){}); } catch(e){}
+    try { localStorage.setItem('commune_'+_communePickerWilaya.code, val); } catch(e){}
   }
 
+  // احتفظ بالـ callback قبل إغلاق النافذة
+  var cb = _communePickerCallback;
   closeCommunePicker();
-  if(_communePickerCallback) _communePickerCallback(val);
+
+  // استدعِ الـ callback بعد إغلاق النافذة
+  if(cb) setTimeout(function(){ cb(val); }, 100);
 }
 
 // ===== دالة قديمة — احتياطي =====
@@ -5592,40 +5655,93 @@ function buildWilayaCommuneOptions() {
 function applyAdminLevelUI() {
   const isNational = adminLevel === 'national';
   const isWilaya   = adminLevel === 'wilaya';
-  const isCommune  = adminLevel === 'commune';
+  const isCommune  = (adminLevel === 'commune' || (!adminLevel && currentRole === 'admin'));
 
-  // العناصر المحلية: تظهر للبلدية فقط
-  document.querySelectorAll('[data-admin-level="local"]').forEach(el => {
+  // العناصر المحلية: مخفية للحكومة والولاية — ظاهرة للبلدية
+  document.querySelectorAll('[data-admin-level="local"]').forEach(function(el) {
     el.style.display = isCommune ? '' : 'none';
   });
 
+  // إعدادات المشرف الرئيسي — مُتحكم بها من _openAdminPanel
+  // لا نُغيّرها هنا حتى لا نتعارض مع isMain
+
   // زر الخروج للحكومة والولاية
-  const govLogout = document.getElementById('govLogoutBtn');
+  var govLogout = document.getElementById('govLogoutBtn');
   if(govLogout) govLogout.style.display = (isNational || isWilaya) ? 'block' : 'none';
 
   // لوحات الإحصاء
-  const natPanel = document.getElementById('nationalStatsPanel');
-  const wlyPanel = document.getElementById('wilayaStatsPanel');
+  var natPanel = document.getElementById('nationalStatsPanel');
+  var wlyPanel = document.getElementById('wilayaStatsPanel');
 
   if(isNational) {
-    if(natPanel) { natPanel.style.display = 'block'; switchGovTab(1); }
+    if(natPanel) { natPanel.style.display = 'block'; try { switchGovTab(1); } catch(e){} }
     if(wlyPanel) wlyPanel.style.display = 'none';
   } else if(isWilaya) {
     if(natPanel) natPanel.style.display = 'none';
     if(wlyPanel) {
       wlyPanel.style.display = 'block';
-      const pname = document.getElementById('wilayaPanelName');
+      var pname = document.getElementById('wilayaPanelName');
       if(pname) pname.textContent = adminWilaya ? adminWilaya.name : '';
-      loadWilayaTotalStats();
+      try { loadWilayaTotalStats(); } catch(e){}
     }
   } else {
+    // بلدية: لا لوحات إحصاء وطنية
     if(natPanel) natPanel.style.display = 'none';
     if(wlyPanel) wlyPanel.style.display = 'none';
   }
 }
 
 
-// ===== إخفاء/إظهار قائمة السائقين =====
+function loadWilayaTotalStats() {
+  if(!adminWilaya) return;
+  const code = adminWilaya.code;
+  db.ref('wilayas/w'+code).once('value').then(snap => {
+    const data = snap.val() || {};
+    let r=0,d=0,p=0,t=0;
+    const wWaste = {}; WASTE_TYPES.forEach(tp=>wWaste[tp.key]=0);
+    const communeRows = [];
+
+    Object.entries(data).forEach(([cname,cdata])=>{
+      const reps = cdata.reports ? Object.values(cdata.reports) : [];
+      const cr=reps.length, cd=reps.filter(x=>x.status==='done'||x.status==='resolved').length;
+      const cp=reps.filter(x=>x.status==='pending'||x.status==='new').length;
+      const {totals,grand} = getWasteTotals(cdata.tonnage ? Object.values(cdata.tonnage) : []);
+      WASTE_TYPES.forEach(tp=>wWaste[tp.key]+=totals[tp.key]);
+      r+=cr; d+=cd; p+=cp; t+=grand;
+      if(cr>0||grand>0) communeRows.push({name:cname,r:cr,d:cd,t:grand});
+    });
+
+    // بطاقات
+    const container = document.getElementById('wilayaTotalStats');
+    if(container) container.innerHTML =
+      statCard('البلاغات',r,'#1565C0','📋') + statCard('تمت',d,'#4CAF50','✅') +
+      statCard('الانتظار',p,'#FF9800','⏳') + statCard('الأطنان',t.toFixed(1),'#E65100','⚖️');
+
+    // رسم دائري
+    destroyChart('wilayaAdmin');
+    const ctx = document.getElementById('chartWilayaAdmin');
+    if(ctx && r>0) {
+      govCharts['wilayaAdmin'] = new Chart(ctx, {
+        type:'doughnut',
+        data:{labels:['تمت','انتظار','أخرى'],
+          datasets:[{data:[d,p,Math.max(0,r-d-p)],
+            backgroundColor:['#4CAF50','#FF9800','#9E9E9E'],borderWidth:2,borderColor:'#fff'}]},
+        options:{responsive:true,plugins:{legend:{position:'bottom',labels:{font:{family:'Cairo',size:11}}}}}
+      });
+    }
+
+    // قائمة البلديات
+    const sel = document.getElementById('wilayaCommuneFilter');
+    if(sel) {
+      sel.innerHTML = '<option value="">— جميع البلديات —</option>';
+      communeRows.sort((a,b)=>b.r-a.r).forEach(c=>{
+        sel.innerHTML += `<option value="${code}|${c.name}">${c.name} (${c.r} بلاغ)</option>`;
+      });
+    }
+  }).catch(()=>{});
+}
+
+
 function toggleDriversPanel() {
   const list = document.getElementById('driversLiveList');
   const btn  = document.getElementById('toggleDriversBtn');
@@ -5677,6 +5793,9 @@ function switchLoginTab(tab) {
 
 // ===== دخول مشرف البلدية =====
 function loginAdmin() {
+  // تأكيد أن adminLevel = commune إذا لم تُعيَّن
+  if(!adminLevel || adminLevel === '') adminLevel = 'commune';
+
   const staff = JSON.parse(localStorage.getItem('medea_staff') || '[]');
   const currentPass = localStorage.getItem('medea_adminPass') || '280876';
 
@@ -5716,6 +5835,66 @@ function _openAdminPanel(label, isMain) {
   applyRoleUI(); // ← يحدّث الشارة العلوية
   updateStats();
   showToast('✓ دخول ناجح — ' + label, 'success');
+}
+
+
+// ===== تحديد البلدية بالـ GPS =====
+async function detectAndSetCommune(role) {
+  return new Promise(function(resolve) {
+    if(!navigator.geolocation) { resolve(false); return; }
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      var url = 'https://nominatim.openstreetmap.org/reverse?lat='+pos.coords.latitude+'&lon='+pos.coords.longitude+'&format=json&accept-language=ar';
+      fetch(url).then(function(r){return r.json();}).then(function(data){
+        var addr = data.address || {};
+        var stateRaw = (addr.state || addr.county || '').replace('ولاية ','').trim();
+        var cityRaw  = (addr.city || addr.town || addr.village || addr.suburb || '').trim();
+        var matched = ALGERIA_WILAYAS.find(function(w){return stateRaw.includes(w.name)||w.name.includes(stateRaw);})
+                   || ALGERIA_WILAYAS.find(function(w){return cityRaw.includes(w.name)||w.name.includes(cityRaw);});
+        if(matched) {
+          currentWilaya  = matched;
+          currentCommune = cityRaw || matched.name;
+          try { showToast('📍 '+currentCommune+' — '+matched.name,'success'); } catch(e){}
+        }
+        resolve(!!matched);
+      }).catch(function(){ resolve(false); });
+    }, function(){ resolve(false); }, {timeout:8000});
+  });
+}
+
+// ===== نافذة اختيار البلدية للسائق =====
+function showDriverCommuneSelector() {
+  if(currentCommune) return;
+  var el = document.createElement('div');
+  el.id = 'driverCommuneOverlay';
+  var opts = ALGERIA_WILAYAS.map(function(w){
+    return '<option value="'+w.code+'">'+w.code+' — '+w.name+'</option>';
+  }).join('');
+  el.innerHTML = '<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99999;display:flex;align-items:center;justify-content:center;direction:rtl;padding:20px"><div style="background:#fff;border-radius:20px;padding:26px 20px;max-width:360px;width:92%;font-family:Cairo,sans-serif;border:3px solid #006233"><h3 style="color:#006233;text-align:center;margin-bottom:8px">📍 حدد موقعك</h3><p style="text-align:center;font-size:0.78rem;color:#888;margin-bottom:14px">اختر ولايتك ثم اكتب اسم بلديتك</p><select id="driverWilayaSel" onchange="prefillDriverCommune()" style="width:100%;padding:10px;border:2px solid #006233;border-radius:12px;font-family:Cairo,sans-serif;font-size:0.88rem;margin-bottom:10px;direction:rtl"><option value="">— اختر الولاية —</option>'+opts+'</select><input type="text" id="driverCommuneInput" placeholder="اكتب اسم بلديتك..." style="width:100%;padding:10px 14px;border:2px solid #E65100;border-radius:12px;font-family:Cairo,sans-serif;font-size:0.9rem;direction:rtl;margin-bottom:14px" onkeydown="if(event.key===\'Enter\')confirmDriverCommune()"><button onclick="confirmDriverCommune()" style="width:100%;padding:12px;background:#006233;color:#fff;border:none;border-radius:12px;font-family:Cairo,sans-serif;font-size:1rem;font-weight:700;cursor:pointer">✔ تأكيد والدخول</button></div></div>';
+  document.body.appendChild(el);
+}
+function prefillDriverCommune() {
+  var code = document.getElementById('driverWilayaSel') ? document.getElementById('driverWilayaSel').value : '';
+  if(!code) return;
+  try {
+    var saved = localStorage.getItem('commune_'+code);
+    if(saved) { var inp=document.getElementById('driverCommuneInput'); if(inp) inp.value=saved; }
+    db.ref('wilayas_communes/'+code).once('value').then(function(snap){
+      if(snap&&snap.val()){var inp=document.getElementById('driverCommuneInput');if(inp)inp.value=snap.val();}
+    }).catch(function(){});
+  } catch(e){}
+}
+function confirmDriverCommune() {
+  var code    = document.getElementById('driverWilayaSel') ? document.getElementById('driverWilayaSel').value : '';
+  var commune = (document.getElementById('driverCommuneInput') ? document.getElementById('driverCommuneInput').value : '').trim();
+  if(!code)   { showToast('⚠️ اختر الولاية','error'); return; }
+  if(!commune||commune.length<2) { showToast('⚠️ اكتب اسم البلدية','error'); return; }
+  currentWilaya  = ALGERIA_WILAYAS.find(function(x){return x.code===code;});
+  currentCommune = commune;
+  try { db.ref('wilayas_communes/'+code).set(commune).catch(function(){}); } catch(e){}
+  try { localStorage.setItem('commune_'+code, commune); } catch(e){}
+  var el = document.getElementById('driverCommuneOverlay');
+  if(el) el.remove();
+  showToast('✅ بلديتك: '+commune, 'success');
 }
 
 function logoutAdmin() {
@@ -9156,12 +9335,11 @@ window.addEventListener('DOMContentLoaded', function() {
   if(savedRole && ['citizen','driver','admin'].indexOf(savedRole) !== -1) {
     // دور محفوظ: تشغيل مباشر
     currentRole = savedRole;
-    var devMode = (savedRole === 'admin') ? 'desktop' : 'mobile';
-    _startApp(devMode);
     if(savedRole === 'driver') {
-      setTimeout(function(){ showPage('driver'); }, 400);
+      goToApp('driver', 'driver');
     } else if(savedRole === 'admin') {
-      // الإدارة: دائماً تطلب تسجيل الدخول حتى لو كان الدور محفوظاً
+      // الإدارة: دائماً تطلب تسجيل الدخول
+      goToApp('admin', 'admin');
       var adminLoginDiv = document.getElementById('adminLogin');
       var adminPanelDiv = document.getElementById('adminPanel');
       if(adminLoginDiv) adminLoginDiv.classList.remove('hidden');
@@ -9170,9 +9348,8 @@ window.addEventListener('DOMContentLoaded', function() {
       var ac = document.getElementById('adminCode');
       if(an) an.value = '';
       if(ac) ac.value = '';
-      setTimeout(function(){ showPage('admin'); }, 200);
     } else {
-      setTimeout(function(){ showPage('home'); }, 200);
+      goToApp('citizen', 'home');
     }
   } else {
     // لا دور محفوظ: شاشة الاختيار
