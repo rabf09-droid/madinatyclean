@@ -3926,25 +3926,49 @@ function selectRole(role) {
   currentRole = role;
   try { localStorage.setItem('medea_role', role); } catch(e) {}
 
+  // إخفاء شاشة الاختيار فوراً
   var sel = document.getElementById('deviceSelector');
-  if(sel) { sel.style.opacity='0'; sel.style.transition='opacity 0.3s'; }
+  if(sel) { sel.style.opacity='0'; sel.style.display='none'; sel.classList.remove('active'); }
 
+  // إظهار mainContent
+  var main = document.getElementById('mainContent');
+  if(main) { main.style.display='block'; main.classList.add('active'); }
+
+  // إخفاء splash
+  var spl = document.getElementById('splash');
+  if(spl) spl.style.display='none';
+
+  // وضع الشاشة
+  try {
+    if(role === 'admin') document.body.classList.add('desktop-mode');
+    else document.body.classList.remove('desktop-mode');
+  } catch(e){}
+
+  // تهيئة
+  try { updateTime(); } catch(e){}
+  try { setupSync(); } catch(e){}
+  try { applyRoleUI(); } catch(e){}
+
+  // إظهار الصفحة الصحيحة
+  var targetPage = role === 'driver' ? 'driver' : role === 'admin' ? 'admin' : 'home';
   setTimeout(function() {
-    if(role === 'citizen') {
-      goToApp('citizen', 'home');
-      // GPS في الخلفية
-      detectAndSetCommune('citizen').catch(function(){});
+    // إخفاء deviceSelector مرة ثانية للتأكيد
+    var s = document.getElementById('deviceSelector');
+    if(s) { s.style.display='none'; s.classList.remove('active'); }
 
-    } else if(role === 'driver') {
-      goToApp('driver', 'driver');
-      // GPS في الخلفية — إذا فشل تظهر النافذة
+    // إخفاء كل الصفحات وإظهار الصحيحة
+    document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+    var target = document.getElementById(targetPage);
+    if(target) target.classList.add('active');
+    window.scrollTo(0,0);
+
+    if(role === 'driver') {
+      try { renderDriverPage && renderDriverPage(); } catch(e){}
       detectAndSetCommune('driver').then(function(ok){
         if(!ok || !currentCommune) showDriverCommuneSelector();
       }).catch(function(){ showDriverCommuneSelector(); });
 
     } else if(role === 'admin') {
-      // إظهار صفحة تسجيل دخول البلدية
-      goToApp('admin', 'admin');
       var loginDiv = document.getElementById('adminLogin');
       var panelDiv = document.getElementById('adminPanel');
       if(loginDiv) loginDiv.classList.remove('hidden');
@@ -3953,27 +3977,68 @@ function selectRole(role) {
       var ac = document.getElementById('adminCode');
       if(an) an.value = '';
       if(ac) ac.value = '';
+
+    } else {
+      // مواطن
+      detectAndSetCommune('citizen').catch(function(){});
+      try { updateStats(); } catch(e){}
     }
-  }, 300);
+
+    // تحميل البيانات
+    try { loadFromCloud('reports','reports',function(d){
+      allReports=d?Object.values(d).map(normalizeReport):[];
+      try{updateStats();}catch(e){}
+    }); } catch(e){}
+    try { loadFromCloud('staff','staff',function(d){
+      if(d){var a=Array.isArray(d)?d:Object.values(d);localStorage.setItem('medea_staff',JSON.stringify(a));}
+    }); } catch(e){}
+
+  }, 200);
 }
 
 // ===== دخول الحكومة والولاية مباشرة =====
 function _openAdminPanelDirect(label) {
   currentAdminName = label;
   currentRole = 'admin';
-  goToApp('admin', 'admin');
-  var loginDiv = document.getElementById('adminLogin');
-  var panelDiv = document.getElementById('adminPanel');
-  if(loginDiv) loginDiv.classList.add('hidden');
-  if(panelDiv) panelDiv.classList.remove('hidden');
-  var cu = document.getElementById('adminCurrentUser');
-  if(cu) cu.textContent = label;
-  var settings = document.getElementById('adminSettingsSection');
-  if(settings) settings.style.display = 'none';
-  try { applyAdminLevelUI(); } catch(e){}
-  try { updateAdminLevelBadge(); } catch(e){}
-  try { applyRoleUI(); } catch(e){}
-  try { showToast('✓ ' + label, 'success'); } catch(e){}
+  // إغلاق كل النوافذ
+  ['communePickerModal','wilayaPickerModal','adminLevelModal'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.style.display='none';
+  });
+  // إخفاء deviceSelector
+  var sel = document.getElementById('deviceSelector');
+  if(sel) { sel.style.display='none'; sel.classList.remove('active'); sel.style.opacity='0'; }
+  // إظهار mainContent
+  var main = document.getElementById('mainContent');
+  if(main) { main.style.display='block'; main.classList.add('active'); }
+  var spl = document.getElementById('splash');
+  if(spl) spl.style.display='none';
+  // تشغيل خفيف
+  try { document.body.classList.add('desktop-mode'); } catch(e){}
+  try { updateTime(); } catch(e){}
+  try { loadFromCloud('reports','reports',function(d){
+    allReports=d?Object.values(d).map(normalizeReport):[];try{updateStats();}catch(e){}
+  }); } catch(e){}
+  try { loadFromCloud('staff','staff',function(d){
+    if(d){var a=Array.isArray(d)?d:Object.values(d);localStorage.setItem('medea_staff',JSON.stringify(a));}
+  }); } catch(e){}
+  // إظهار لوحة الإدارة مباشرة (بدون تسجيل دخول)
+  setTimeout(function() {
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+    var ap = document.getElementById('admin'); if(ap) ap.classList.add('active');
+    var loginDiv = document.getElementById('adminLogin');
+    var panelDiv = document.getElementById('adminPanel');
+    if(loginDiv) loginDiv.classList.add('hidden');
+    if(panelDiv) panelDiv.classList.remove('hidden');
+    var cu = document.getElementById('adminCurrentUser');
+    if(cu) cu.textContent = label;
+    var settings = document.getElementById('adminSettingsSection');
+    if(settings) settings.style.display = 'none';
+    try { applyAdminLevelUI(); } catch(e){}
+    try { updateAdminLevelBadge(); } catch(e){}
+    try { applyRoleUI(); } catch(e){}
+    try { showToast('✓ ' + label, 'success'); } catch(e){}
+    window.scrollTo(0,0);
+  }, 100);
 }
 
 function applyRoleUI() {
@@ -4970,9 +5035,34 @@ function selectAdminLevel(level) {
           openCommunePicker(w, function(c) {
             adminCommune   = c;
             currentCommune = c;
+            // إغلاق كل النوافذ
+            ['communePickerModal','wilayaPickerModal','adminLevelModal'].forEach(function(id){
+              var el = document.getElementById(id);
+              if(el) el.style.display = 'none';
+            });
+            // إخفاء deviceSelector نهائياً
+            var sel = document.getElementById('deviceSelector');
+            if(sel) { sel.style.display='none'; sel.classList.remove('active'); }
+            // إظهار mainContent
+            var main = document.getElementById('mainContent');
+            if(main) { main.style.display='block'; main.classList.add('active'); }
+            // تشغيل التطبيق خفيف
+            currentRole = 'admin';
+            adminLevel  = 'commune';
+            try { if(document.body) document.body.classList.remove('desktop-mode'); } catch(e){}
+            try { updateTime(); } catch(e){}
+            try { loadFromCloud('reports','reports',function(d){
+              allReports=d?Object.values(d).map(normalizeReport):[];
+              try{updateStats();}catch(e){}
+            }); } catch(e){}
+            try { loadFromCloud('staff','staff',function(d){
+              if(d){var a=Array.isArray(d)?d:Object.values(d);localStorage.setItem('medea_staff',JSON.stringify(a));}
+            }); } catch(e){}
+            // إظهار صفحة الإدارة مع تسجيل الدخول
             setTimeout(function() {
-              currentRole = 'admin';
-              goToApp('admin', 'admin');
+              document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+              var ap = document.getElementById('admin');
+              if(ap) ap.classList.add('active');
               var loginDiv = document.getElementById('adminLogin');
               var panelDiv = document.getElementById('adminPanel');
               if(loginDiv) loginDiv.classList.remove('hidden');
@@ -4981,9 +5071,12 @@ function selectAdminLevel(level) {
               var ac = document.getElementById('adminCode');
               if(an) an.value = '';
               if(ac) ac.value = '';
-            }, 150);
+              try { applyRoleUI(); } catch(e){}
+              try { switchLoginTab('super'); } catch(e){}
+              window.scrollTo(0,0);
+            }, 100);
           });
-        }, 150);
+        }, 200);
       });
     }, 150);
   }
@@ -9343,7 +9436,7 @@ function showMonthlyAchievement() {
     const monthTons = Math.round(tonnage.filter(r=>inMonth(r.date||'')).reduce((s,r)=>s+(parseFloat(r.weight)||0),0)*10)/10;
     const monthBins = truckTrackingData.collectedBins ? truckTrackingData.collectedBins.reduce((s,b)=>s+(parseInt(b.count)||1),0) : 0;
 
-    // أفضل سائق
+  // أفضل سائق
     const staff = (function(){try{return JSON.parse(localStorage.getItem('medea_staff')||'[]')}catch(e){return []}}());
     const drivers = staff.filter(s=>s.role&&s.role.includes('سائق'));
     let mvp = '-';
@@ -9467,11 +9560,12 @@ window.addEventListener('DOMContentLoaded', function() {
   if(savedRole && ['citizen','driver','admin'].indexOf(savedRole) !== -1) {
     // دور محفوظ: تشغيل مباشر
     currentRole = savedRole;
+    var devMode = (savedRole === 'admin') ? 'desktop' : 'mobile';
+    _startApp(devMode);
     if(savedRole === 'driver') {
-      goToApp('driver', 'driver');
+      setTimeout(function(){ showPage('driver'); }, 400);
     } else if(savedRole === 'admin') {
-      // الإدارة: دائماً تطلب تسجيل الدخول
-      goToApp('admin', 'admin');
+      // الإدارة: دائماً تطلب تسجيل الدخول حتى لو كان الدور محفوظاً
       var adminLoginDiv = document.getElementById('adminLogin');
       var adminPanelDiv = document.getElementById('adminPanel');
       if(adminLoginDiv) adminLoginDiv.classList.remove('hidden');
@@ -9480,8 +9574,9 @@ window.addEventListener('DOMContentLoaded', function() {
       var ac = document.getElementById('adminCode');
       if(an) an.value = '';
       if(ac) ac.value = '';
+      setTimeout(function(){ showPage('admin'); }, 200);
     } else {
-      goToApp('citizen', 'home');
+      setTimeout(function(){ showPage('home'); }, 200);
     }
   } else {
     // لا دور محفوظ: شاشة الاختيار
