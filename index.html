@@ -2223,96 +2223,96 @@ select.input {
   <!-- ========== الصفحة الرئيسية ========== -->
   <div id="home" class="page active">
 
-    <!-- شريط إنجاز اليوم -->
+    <!--    -->
     <div id="dailyAchievementBar">
       <div class="ach-item">
         <span class="ach-num" id="achReports">0</span>
-        <span class="ach-label">✅ بلاغ منجز</span>
+        <span class="ach-label">  </span>
       </div>
       <div class="ach-divider"></div>
       <div class="ach-item">
         <span class="ach-num" id="achBins">0</span>
-        <span class="ach-label">🗑️ حاوية مجمّعة</span>
+        <span class="ach-label">  </span>
       </div>
       <div class="ach-divider"></div>
       <div class="ach-item">
         <span class="ach-num" id="achTons">0</span>
-        <span class="ach-label">⚖️ طن مفروز</span>
+        <span class="ach-label">  </span>
       </div>
       <div class="ach-divider"></div>
       <div class="ach-item">
         <span class="ach-num" id="achDrivers">0</span>
-        <span class="ach-label">🚛 سائق نشط</span>
+        <span class="ach-label">  </span>
       </div>
     </div>
     <button class="btn btn-primary mb ripple" onclick="showPage('report')">
       <i class="fas fa-truck" style="font-size:2.5rem"></i>
-      <span data-i18n="sendReport">إرسال تبليغ</span>
+      <span data-i18n="sendReport"> </span>
     </button>
 
     <div class="card hover-lift" style="border-color:#667eea;background:linear-gradient(135deg,#f8f9ff,#eef1ff)">
-      <h3 style="color:#667eea" data-i18n="toolsTitle">🎬 أدوات العرض</h3>
+      <h3 style="color:#667eea" data-i18n="toolsTitle">  </h3>
       <div class="grid-2">
         <button class="btn btn-purple ripple" onclick="loadDemoData()">
-          <i class="fas fa-dice"></i> <span data-i18n="demoData">بيانات تجريبية</span>
+          <i class="fas fa-dice"></i> <span data-i18n="demoData"> </span>
         </button>
         <button class="btn btn-dark ripple" onclick="openPrintDialog()">
-          <i class="fas fa-print"></i> <span data-i18n="printPDF">طباعة PDF</span>
+          <i class="fas fa-print"></i> <span data-i18n="printPDF"> PDF</span>
         </button>
       </div>
       <button class="btn btn-purple ripple" onclick="showPage('dashboard')" style="margin-top:10px">
-        <i class="fas fa-chart-bar"></i> <span data-i18n="dashboard">لوحة الإحصائيات</span>
+        <i class="fas fa-chart-bar"></i> <span data-i18n="dashboard"> </span>
       </button>
       <button class="btn btn-secondary ripple" onclick="exitApp()">
-        <i class="fas fa-sign-out-alt"></i> <span data-i18n="exit">الخروج</span>
+        <i class="fas fa-sign-out-alt"></i> <span data-i18n="exit"></span>
       </button>
     </div>
 
     <div class="card hover-lift">
-      <h3 data-i18n="servicesTitle">✨ الخدمات</h3>
+      <h3 data-i18n="servicesTitle"> </h3>
       <div class="grid-2">
         <button class="btn btn-warning ripple" onclick="showPage('schedule')">
-          <i class="fas fa-calendar-alt"></i> <span data-i18n="schedule">جدول الجمع</span>
+          <i class="fas fa-calendar-alt"></i> <span data-i18n="schedule"> </span>
         </button>
         <button class="btn btn-purple ripple" onclick="showPage('tips')">
-          <i class="fas fa-lightbulb"></i> <span data-i18n="awareness">توعية</span>
+          <i class="fas fa-lightbulb"></i> <span data-i18n="awareness"></span>
         </button>
         <button class="btn btn-info ripple" onclick="showPage('requests')">
-          <i class="fas fa-tools"></i> <span data-i18n="myRequests">طلباتي</span>
+          <i class="fas fa-tools"></i> <span data-i18n="myRequests"></span>
         </button>
         <button class="btn btn-success ripple" onclick="showPage('recycling')">
-          <i class="fas fa-recycle"></i> <span data-i18n="recyclingCalc">حاسبة التدوير</span>
+          <i class="fas fa-recycle"></i> <span data-i18n="recyclingCalc"> </span>
         </button>      </div>
     </div>
 
     <div class="card hover-lift">
-      <h3 data-i18n="circularEconomy">🔄 الاقتصاد الدائري</h3>
+      <h3 data-i18n="circularEconomy">  </h3>
       <div class="grid-2">
         <button class="btn btn-success ripple" onclick="showPage('sortingCenter')">
-          <i class="fas fa-industry"></i> <span data-i18n="sortingCenter">مركز الفرز</span>
+          <i class="fas fa-industry"></i> <span data-i18n="sortingCenter"> </span>
         </button>
         <button class="btn btn-purple ripple" onclick="showPage('recyclingMarket')">
-          <i class="fas fa-store"></i> <span data-i18n="recyclingMarket">سوق التدوير</span>
+          <i class="fas fa-store"></i> <span data-i18n="recyclingMarket"> </span>
         </button>
       </div>
     </div>
 
     <div class="card hover-lift" style="margin-top:12px">
-      <h3 data-i18n="tracking">🚚 التتبع المباشر</h3>
+      <h3 data-i18n="tracking">  </h3>
       <button class="btn btn-secondary ripple" onclick="showPage('truckTracking')">
-        <i class="fas fa-map-marker-alt"></i> <span data-i18n="trackTrucks">تتبع مسار الشاحنات</span>
+        <i class="fas fa-map-marker-alt"></i> <span data-i18n="trackTrucks">  </span>
       </button>
     </div>
 
-    <!-- الرواق: للإدارة فقط -->
+    <!-- :   -->
     <div class="card hover-lift role-section" data-roles="admin" style="margin-top:12px">
-      <h3 data-i18n="hallTitle">👥 الرواق</h3>
+      <h3 data-i18n="hallTitle"> </h3>
       <div class="grid-2">
         <button class="btn btn-warning sb2 ripple" onclick="showPage('driver')">
-          <i class="fas fa-truck-loading"></i> <span data-i18n="drivers">السائقين</span>
+          <i class="fas fa-truck-loading"></i> <span data-i18n="drivers"></span>
         </button>
         <button class="btn btn-dark sb2 ripple" onclick="showPage('admin')">
-          <i class="fas fa-shield-alt"></i> <span data-i18n="admin">الإدارة</span>
+          <i class="fas fa-shield-alt"></i> <span data-i18n="admin"></span>
         </button>
       </div>
     </div>
@@ -2321,7 +2321,7 @@ select.input {
   <!-- ========== صفحة إرسال تبليغ ========== -->
   <div id="report" class="page">
     <h2 style="margin-bottom:15px;color:var(--primary);text-align:center">
-      <i class="fas fa-file-alt"></i> <span data-i18n="newReport">بلاغ جديد</span>
+      <i class="fas fa-file-alt"></i> <span data-i18n="newReport"> </span>
     </h2>
     <div class="card">
       <div class="cam-box" onclick="takePhoto()">
@@ -2329,37 +2329,37 @@ select.input {
         <img id="camImg" style="display:none">
       </div>
       <button class="btn btn-primary ripple" onclick="takePhoto()">
-        <i class="fas fa-camera"></i> <span data-i18n="takePhoto">التقاط الصورة</span>
+        <i class="fas fa-camera"></i> <span data-i18n="takePhoto"> </span>
       </button>
       <button class="btn btn-dark ripple" onclick="getLocation()" id="getLocationBtn">
-        <i class="fas fa-map-pin"></i> <span data-i18n="getLocBtn">تحديد الموقع GPS</span>      </button>
+        <i class="fas fa-map-pin"></i> <span data-i18n="getLocBtn">  GPS</span>      </button>
       <button class="btn ripple" style="background:#757575;margin-top:0;margin-bottom:8px;font-size:0.9rem" onclick="manualLocation()">
-        <i class="fas fa-keyboard"></i> <span data-i18n="manualLoc">إدخال يدوي</span>
+        <i class="fas fa-keyboard"></i> <span data-i18n="manualLoc"> </span>
       </button>
-      <input type="text" class="input" id="addrInput" placeholder="📍 اسم الحي أو الشارع" data-i18n-ph="addrPh">
+      <input type="text" class="input" id="addrInput" placeholder="    " data-i18n-ph="addrPh">
       <div style="display:flex;gap:10px">
-        <input type="text" class="input" id="gpsInput" placeholder="🌍 إحداثيات GPS" data-i18n-ph="gpsPh" readonly style="background:var(--bg);flex:2">
-        <button class="btn voice-btn ripple" style="flex:1;margin:0;padding:12px" onclick="startVoiceInput()" title="إملاء صوتي">
+        <input type="text" class="input" id="gpsInput" placeholder="  GPS" data-i18n-ph="gpsPh" readonly style="background:var(--bg);flex:2">
+        <button class="btn voice-btn ripple" style="flex:1;margin:0;padding:12px" onclick="startVoiceInput()" title=" ">
           <i class="fas fa-microphone"></i>
         </button>
       </div>
       <select class="in input" id="wasteTypeSelect">
-        <option value="mixed">🗑️ نفايات عامة</option>
-        <option value="organic">🍂 نفايات عضوية</option>
-        <option value="plastic">🧴 بلاستيك</option>
-        <option value="metal">⚙️ معادن</option>
-        <option value="paper">📄 ورق/كرتون</option>
-        <option value="glass">🥃 زجاج</option>
+        <option value="mixed">  </option>
+        <option value="organic">  </option>
+        <option value="plastic"> </option>
+        <option value="metal"> </option>
+        <option value="paper"> /</option>
+        <option value="glass"> </option>
       </select>
       <label class="custom-checkbox" style="margin:10px 0">
         <input type="checkbox" id="recurringCheck">
-        <span data-i18n="recurring">🔁 بلاغ متكرر أسبوعياً</span>
+        <span data-i18n="recurring">   </span>
       </label>
       <button class="btn btn-primary ripple" style="height:55px;font-size:1.1rem" onclick="sendReport()" id="sendBtn">
-        <i class="fas fa-paper-plane"></i> <span data-i18n="sendNow">إرسال البلاغ الآن</span>
+        <i class="fas fa-paper-plane"></i> <span data-i18n="sendNow">  </span>
       </button>
       <button class="btn ripple" style="background:#757575" onclick="showPage('home')">
-        <i class="fas fa-arrow-right"></i> <span data-i18n="back">رجوع</span>
+        <i class="fas fa-arrow-right"></i> <span data-i18n="back"></span>
       </button>
     </div>
   </div>
@@ -2474,129 +2474,129 @@ select.input {
 
   <!-- ========== صفحة السائقين ========== -->
   <div id="driver" class="page">
-    <!-- ===== شاشة تسجيل الدخول ===== -->
+    <!-- =====    ===== -->
     <div id="driverLogin">
       <h2 style="margin-bottom:14px;color:var(--primary);text-align:center">
-        <i class="fas fa-truck-loading"></i> دخول السائق
+        <i class="fas fa-truck-loading"></i>  
       </h2>
       <div class="card">
-        <h3><i class="fas fa-sign-in-alt"></i> أدخل اسمك للمتابعة</h3>
-        <input type="text" id="driverName" class="input" placeholder="👤 اسمك الكامل" data-i18n-ph="namePh">
+        <h3><i class="fas fa-sign-in-alt"></i>   </h3>
+        <input type="text" id="driverName" class="input" placeholder="  " data-i18n-ph="namePh">
         <button class="btn btn-warning ripple" onclick="loginDriver()">
-          <i class="fas fa-check"></i> دخول
+          <i class="fas fa-check"></i> 
         </button>
       </div>
       <button class="btn ripple" style="background:#757575" onclick="goBackToSelector()">
-        <i class="fas fa-arrow-right"></i> رجوع
+        <i class="fas fa-arrow-right"></i> 
       </button>
     </div>
 
-    <!-- ===== لوحة السائق الخاصة ===== -->
+    <!-- =====    ===== -->
     <div id="driverPanel" class="hidden">
 
-      <!-- بطاقة هوية السائق -->
+      <!--    -->
       <div style="background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px">
-        <div style="font-size:2.4rem">🚛</div>
+        <div style="font-size:2.4rem"></div>
         <div>
-          <div style="font-weight:900;font-size:1.1rem" id="driverWelcomeName">السائق</div>
+          <div style="font-weight:900;font-size:1.1rem" id="driverWelcomeName"></div>
           <div style="font-size:0.82rem;opacity:0.9;margin-top:2px">
-            <span>القطاع: </span><span id="driverSectorDisplay" style="font-weight:700;background:rgba(255,255,255,0.25);padding:2px 8px;border-radius:10px">—</span>
+            <span>: </span><span id="driverSectorDisplay" style="font-weight:700;background:rgba(255,255,255,0.25);padding:2px 8px;border-radius:10px">�</span>
           </div>
-          <div style="font-size:0.75rem;opacity:0.8;margin-top:3px" id="driverSectorZones">—</div>
+          <div style="font-size:0.75rem;opacity:0.8;margin-top:3px" id="driverSectorZones">�</div>
         </div>
       </div>
 
-      <!-- بطاقة الجدول الخاص بالسائق -->
+      <!--     -->
       <div class="card" id="driverScheduleCard" style="padding:12px;margin-bottom:10px">
-        <h3 style="font-size:0.95rem;margin-bottom:8px;color:var(--primary)"><i class="fas fa-calendar-check"></i> جدولك لهذا اليوم</h3>
+        <h3 style="font-size:0.95rem;margin-bottom:8px;color:var(--primary)"><i class="fas fa-calendar-check"></i>   </h3>
         <div id="driverTodaySchedule"></div>
       </div>
 
-      <!-- أزرار التتبع والتسجيل -->
-      <!-- زر التتبع -->
+      <!--    -->
+      <!--   -->
       <div id="trackingOffPanel">
         <button class="btn btn-secondary ripple" style="margin-bottom:10px" onclick="startDriverTracking()">
-          <i class="fas fa-play"></i> بدء تتبع المسار
+          <i class="fas fa-play"></i>   
         </button>
       </div>
 
-      <!-- لوحة التتبع المضمنة داخل صفحة السائق -->
+      <!--       -->
       <div id="driverTrackingPanel" style="display:none;margin-bottom:12px">
         <div style="background:linear-gradient(135deg,#1b5e20,#2e7d32);color:#fff;border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between">
-          <span style="font-weight:700;font-size:0.9rem"><i class="fas fa-signal"></i> التتبع نشط</span>
+          <span style="font-weight:700;font-size:0.9rem"><i class="fas fa-signal"></i>  </span>
           <span id="trackingTimer" style="font-size:0.82rem;opacity:0.9">00:00:00</span>
         </div>
-        <!-- خريطة مصغرة -->
+        <!--   -->
         <div id="driverInlineMap" style="width:100%;height:220px;border-radius:var(--radius-sm);overflow:hidden;margin-bottom:10px;border:2px solid var(--primary);background:#e8f5e9;display:flex;align-items:center;justify-content:center">
           <div style="text-align:center;color:var(--primary)">
             <i class="fas fa-map-marker-alt" style="font-size:2rem;margin-bottom:6px;display:block"></i>
-            <span style="font-size:0.82rem">جاري تحديد موقعك...</span>
+            <span style="font-size:0.82rem">  ...</span>
           </div>
         </div>
-        <!-- إحصاء سريع -->
+        <!--   -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
           <div style="background:var(--bg-card);border-radius:var(--radius-sm);padding:10px;text-align:center;border:2px solid var(--success)">
             <div style="font-size:1.6rem;font-weight:900;color:var(--success)" id="driverBinCount">0</div>
-            <div style="font-size:0.72rem;color:var(--text-light)">حاوية مجمّعة</div>
+            <div style="font-size:0.72rem;color:var(--text-light)"> </div>
           </div>
           <div style="background:var(--bg-card);border-radius:var(--radius-sm);padding:10px;text-align:center;border:2px solid var(--primary)">
             <div style="font-size:1.6rem;font-weight:900;color:var(--primary)" id="driverDistCount">0</div>
-            <div style="font-size:0.72rem;color:var(--text-light)">نقطة مسجّلة</div>
+            <div style="font-size:0.72rem;color:var(--text-light)"> </div>
           </div>
         </div>
         <button class="btn btn-success ripple" id="mainRecordBinBtn" onclick="recordBinFromDriver()" style="font-size:1rem;padding:14px;margin-bottom:8px">
-          <i class="fas fa-trash-alt"></i> تسجيل موقع حاوية
+          <i class="fas fa-trash-alt"></i>   
         </button>
         <button class="btn btn-danger ripple" style="font-size:0.9rem;padding:10px" onclick="stopDriverTracking()">
-          <i class="fas fa-stop-circle"></i> إيقاف التتبع وإنهاء المهمة
+          <i class="fas fa-stop-circle"></i>    
         </button>
       </div>
 
-      <!-- تفاصيل تسجيل حاوية (تظهر عند الضغط) -->
+      <!--    (  ) -->
       <div id="binTrackingControls" style="display:none;margin-bottom:12px">
         <div class="info-card" style="text-align:center;margin-bottom:10px;font-weight:bold">
-          <i class="fas fa-signal"></i> جاري تسجيل موقع الحاوية...
+          <i class="fas fa-signal"></i>    ...
         </div>
         <button class="btn btn-success ripple" onclick="recordBinCollection()" style="font-size:1.1rem;padding:18px;display:none" id="recordBinBtn">
-          <i class="fas fa-trash-alt"></i> <span data-i18n="recordBin">تسجيل موقع الحاوية</span>
+          <i class="fas fa-trash-alt"></i> <span data-i18n="recordBin">  </span>
         </button>
         <div id="binRecordResult" style="display:none;margin-top:12px;background:var(--bg-card);border-radius:var(--radius-sm);padding:14px;border:2px solid var(--success)">
-          <div style="font-weight:700;color:var(--primary);margin-bottom:8px;text-align:center"><i class="fas fa-map-marker-alt"></i> تفاصيل الموقع المسجل</div>
-          <div class="info-row"><b>📍 العنوان:</b> <span id="binAddr">-</span></div>
-          <div class="info-row"><b>🌍 الإحداثيات:</b> <span id="binCoords">-</span></div>
+          <div style="font-weight:700;color:var(--primary);margin-bottom:8px;text-align:center"><i class="fas fa-map-marker-alt"></i>   </div>
+          <div class="info-row"><b> :</b> <span id="binAddr">-</span></div>
+          <div class="info-row"><b> :</b> <span id="binCoords">-</span></div>
           <div style="margin-top:12px">
-            <label style="font-weight:700;color:var(--text);display:block;margin-bottom:6px"><i class="fas fa-trash"></i> عدد الحاويات في هذا الموقع:</label>
+            <label style="font-weight:700;color:var(--text);display:block;margin-bottom:6px"><i class="fas fa-trash"></i>     :</label>
             <div style="display:flex;gap:10px;align-items:center">
-              <button onclick="changeBinCount(-1)" style="width:44px;height:44px;border-radius:50%;border:none;background:var(--danger);color:#fff;font-size:1.3rem;cursor:pointer;font-weight:900;flex-shrink:0">−</button>
+              <button onclick="changeBinCount(-1)" style="width:44px;height:44px;border-radius:50%;border:none;background:var(--danger);color:#fff;font-size:1.3rem;cursor:pointer;font-weight:900;flex-shrink:0"></button>
               <input type="number" id="binCountInput" value="1" min="1" max="50"
                 style="flex:1;text-align:center;font-size:1.4rem;font-weight:900;border:2px solid var(--primary);border-radius:var(--radius-sm);padding:8px;color:var(--primary);font-family:Cairo,sans-serif">
               <button onclick="changeBinCount(1)" style="width:44px;height:44px;border-radius:50%;border:none;background:var(--success);color:#fff;font-size:1.3rem;cursor:pointer;font-weight:900;flex-shrink:0">+</button>
             </div>
           </div>
           <button class="btn btn-primary ripple" onclick="confirmBinCollection()" style="margin-top:12px">
-            <i class="fas fa-check-circle"></i> تثبيت وحفظ
+            <i class="fas fa-check-circle"></i>  
           </button>
           <button class="btn ripple" onclick="cancelBinCollection()" style="background:#757575;margin-top:6px;font-size:0.9rem">
-            <i class="fas fa-times"></i> إلغاء
+            <i class="fas fa-times"></i> 
           </button>
         </div>
       </div>
 
       <button class="btn btn-primary ripple" style="margin-bottom:12px" onclick="showPage('driverTonnage')">
-        <i class="fas fa-plus"></i> <span data-i18n="newTonnage">تسجيل نفايات جديدة</span>
+        <i class="fas fa-plus"></i> <span data-i18n="newTonnage">  </span>
       </button>
 
-      <!-- قسم المهام الخاصة بالسائق -->
+      <!--     -->
       <div class="card" style="padding:12px">
-        <h3 style="color:var(--primary);margin-bottom:8px;font-size:0.95rem"><i class="fas fa-tasks"></i> مهامك من الإدارة <span id="tasksCountBadge" style="background:var(--danger);color:#fff;border-radius:10px;padding:1px 8px;font-size:0.75rem;margin-right:4px"></span></h3>
+        <h3 style="color:var(--primary);margin-bottom:8px;font-size:0.95rem"><i class="fas fa-tasks"></i>    <span id="tasksCountBadge" style="background:var(--danger);color:#fff;border-radius:10px;padding:1px 8px;font-size:0.75rem;margin-right:4px"></span></h3>
         <div id="tasksList"></div>
       </div>
 
       <button class="btn btn-secondary ripple" onclick="endMission()" id="endMissionBtn" style="display:none;margin-top:10px">
-        <i class="fas fa-flag-checkered"></i> إنهاء المهمة
+        <i class="fas fa-flag-checkered"></i>  
       </button>
       <button class="btn btn-danger ripple" style="margin-top:8px" onclick="logoutDriver()">
-        <i class="fas fa-sign-out-alt"></i> خروج
+        <i class="fas fa-sign-out-alt"></i> 
       </button>
     </div>
   </div>
@@ -3285,15 +3285,15 @@ select.input {
   <!-- ========== جدول الجمع ========== -->
   <div id="schedule" class="page">
     <h2 style="margin-bottom:15px;color:var(--primary);text-align:center">
-      <i class="fas fa-calendar-alt"></i> <span data-i18n="schedulePage">جدول جمع النفايات</span>
+      <i class="fas fa-calendar-alt"></i> <span data-i18n="schedulePage">  </span>
     </h2>
     <div class="card" id="scheduleDisplay"></div>
-    <!-- [8] تصدير جدول الجمع PDF -->
+    <!-- [8]    PDF -->
     <button class="btn btn-secondary ripple" onclick="exportScheduleToPDF()" style="margin-top:5px">
-      <i class="fas fa-file-pdf"></i> تصدير الجدول كـ PDF
+      <i class="fas fa-file-pdf"></i>    PDF
     </button>
     <button class="btn ripple" style="background:#757575" onclick="showPage('home')">
-      <i class="fas fa-arrow-right"></i> <span data-i18n="back">رجوع</span>
+      <i class="fas fa-arrow-right"></i> <span data-i18n="back"></span>
     </button>
   </div>
 
@@ -4467,7 +4467,7 @@ function showPage(id) {
       window.scrollTo({top: 0, behavior: 'smooth'});
     }
     
-    // تهيئة خاصة لكل صفحة
+    //    
     if(id === 'dashboard') setTimeout(renderChart, 200);
     if(id === 'reportsPage') showReportsPage();
     if(id === 'publicStats') updatePublicStats();
@@ -4481,12 +4481,12 @@ function showPage(id) {
     if(id === 'recyclingMarket') loadMarketMaterials();
     if(id === 'truckTracking') initTruckTrackingMap();
     if(id === 'routeTracking') {
-      // تعبئة قائمة القطاعات من البيانات المحفوظة
+      //      
       try {
         const sectors = JSON.parse(localStorage.getItem('medea_schedule') || '[]');
         const sel = document.getElementById('sectorSelect');
         if(sel) {
-          sel.innerHTML = '<option value="">-- اختر القطاع --</option>';
+          sel.innerHTML = '<option value="">--   --</option>';
           const seen = new Set();
           sectors.forEach(s => {
             const num = s.num || s.name || '';
@@ -4494,14 +4494,14 @@ function showPage(id) {
               seen.add(num);
               const opt = document.createElement('option');
               opt.value = num;
-              opt.textContent = 'القطاع ' + num;
+              opt.textContent = ' ' + num;
               sel.appendChild(opt);
             }
           });
           if(seen.size === 0) {
             [1,2,3,4,5].forEach(n => {
               const opt = document.createElement('option');
-              opt.value = n; opt.textContent = 'القطاع ' + n;
+              opt.value = n; opt.textContent = ' ' + n;
               sel.appendChild(opt);
             });
           }
@@ -4509,19 +4509,19 @@ function showPage(id) {
       } catch(e) {}
       loadSectorRoute();
     }
-    if(id === 'driver') updateDriverPanel();
+    if(id === 'driver') { autoLoginDriver(); updateDriverPanel(); }
     if(id === 'pdfPreviewPage') initPreviewMap();
-    // [2] أرقام متحركة عند دخول الإدارة
+    // [2]     
     if(id === 'admin') setTimeout(animateStatNums, 400);
-    // [3+4] تنبيهات + سائقون مباشرة
+    // [3+4]  +  
     if(id === 'admin') { updateAlertsPanel(); updateDriversLivePanel(); }
-    // [6] خريطة حرارية
+    // [6]  
     if(id === 'dashboard') setTimeout(renderHeatmap, 300);
-    // [A] مقارنة أسبوعية
+    // [A]  
     if(id === 'weeklyCompare') setTimeout(renderWeeklyCompare, 200);
-    // [B] ترتيب السائقين
+    // [B]  
     if(id === 'driversRanking') setTimeout(renderDriversRanking, 200);
-    // زر الطوارئ — يظهر فقط للمواطن في الصفحة الرئيسية والتبليغ
+    //   �       
     const eBtn = document.getElementById('emergencyBtn');
     if(eBtn) eBtn.classList.toggle('visible', id==='home' || id==='report');
   } catch(e) {}
@@ -4683,7 +4683,7 @@ function updateStats() {
     
     updatePublicStats();
 
-    // [1] شريط إنجاز اليوم
+    // [1]   
     updateDailyAchievement();
   } catch(e) {}
 }
@@ -4863,13 +4863,13 @@ function sendReport() {
   try {
     const a = document.getElementById('addrInput').value.trim();
     if(!a) {
-      showToast('⚠️ أدخل العنوان', 'error');
+      showToast('  ', 'error');
       return;
     }
     
     const btn = document.getElementById('sendBtn');
     const orig = btn.innerHTML;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري...';
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ...';
     btn.disabled = true;
     
     const isRecurring = document.getElementById('recurringCheck').checked;
@@ -4878,7 +4878,7 @@ function sendReport() {
     const newReport = {
       id: Date.now(),
       addr: a,
-      gps: document.getElementById('gpsInput').value || 'غير محدد',
+      gps: document.getElementById('gpsInput').value || ' ',
       image: tempImage,
       doneImage: null,
       date: new Date().toLocaleDateString('ar-DZ'),
@@ -4892,7 +4892,7 @@ function sendReport() {
     saveReport(newReport);
     addPoints(10);
     
-    showToast('✅ تم الإرسال! +10 نقاط 🎉', 'success');
+    showToast('  ! +10  ', 'success');
     document.getElementById('thanksOverlay').style.display = 'flex';
     
     tempImage = null;
@@ -4911,7 +4911,7 @@ function sendReport() {
       btn.disabled = false;
     }, 3000);
   } catch(e) {
-    showToast('⚠️ خطأ في الإرسال', 'error');
+    showToast('   ', 'error');
   }
 }
 
@@ -5897,19 +5897,149 @@ function confirmDriverCommune() {
   showToast('✅ بلديتك: '+commune, 'success');
 }
 
+
+function _onFirstInteraction() {
+    playWelcomeSpeech();
+    document.removeEventListener('click',     _onFirstInteraction);
+    document.removeEventListener('touchstart', _onFirstInteraction);
+    document.removeEventListener('keydown',   _onFirstInteraction);
+  }
+
+function _speak() {
+          var voices = window.speechSynthesis.getVoices();
+          var arabicVoice = voices.find(v => v.lang && v.lang.startsWith('ar'));
+          if (arabicVoice) utterance.voice = arabicVoice;
+          window.speechSynthesis.speak(utterance);
+        }
+
+function autoLoginDriver() {
+  //       �  
+  if(currentDriver) return;
+  //     �  
+  var saved = '';
+  try { saved = localStorage.getItem('medea_lastDriver') || ''; } catch(e) {}
+  if(!saved) return;
+  //        
+  var staff = [];
+  try { staff = JSON.parse(localStorage.getItem('medea_staff')||'[]'); } catch(e) {}
+  var isValid = staff.some(function(s){ return s.name === saved && s.role && s.role.includes(''); });
+  if(!isValid) return;
+  //      
+  var nameInput = document.getElementById('driverName');
+  if(nameInput) nameInput.value = saved;
+  loginDriver();
+}
+
+function getAudioCtx() {
+    if (!_audioCtx) {
+      try { _audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+    }
+    return _audioCtx;
+  }
+
+function playTone(frequency, duration, type, gainVal, delay) {
+    try {
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const osc  = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type      = type || 'sine';
+      osc.frequency.setValueAtTime(frequency, ctx.currentTime + (delay||0));
+      gain.gain.setValueAtTime(gainVal || 0.18, ctx.currentTime + (delay||0));
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + (delay||0) + duration);
+      osc.start(ctx.currentTime + (delay||0));
+      osc.stop(ctx.currentTime  + (delay||0) + duration);
+    } catch(e) {}
+  }
+
+function playWelcomeSpeech() {
+    if (_welcomePlayed) return;
+    _welcomePlayed = true;
+
+    // 1)  AudioContext (  )
+    try { getAudioCtx(); } catch(e) {}
+
+    // 2)      (0.6 )
+    try {
+      //   
+      playTone(523, 0.12, 'sine', 0.20, 0.00);
+      playTone(659, 0.12, 'sine', 0.20, 0.14);
+      playTone(784, 0.12, 'sine', 0.20, 0.28);
+      playTone(1047,0.30, 'sine', 0.22, 0.42);
+    } catch(e) {}
+
+    // 3)    0.9 
+    setTimeout(function() {
+      try {
+        if (!('speechSynthesis' in window)) return;
+        window.speechSynthesis.cancel();
+
+        var utterance = new SpeechSynthesisUtterance(WELCOME_TEXT);
+        utterance.lang  = 'ar-DZ'; //   �   ar-SA    
+        utterance.rate  = 0.92;    //  
+        utterance.pitch = 1.05;    //  
+        utterance.volume = 0.95;
+
+        //      
+        function _speak() {
+          var voices = window.speechSynthesis.getVoices();
+          var arabicVoice = voices.find(v => v.lang && v.lang.startsWith('ar'));
+          if (arabicVoice) utterance.voice = arabicVoice;
+          window.speechSynthesis.speak(utterance);
+        }
+
+        if (window.speechSynthesis.getVoices().length > 0) {
+          _speak();
+        } else {
+          window.speechSynthesis.onvoiceschanged = function() {
+            window.speechSynthesis.onvoiceschanged = null;
+            _speak();
+          };
+          // :    
+          setTimeout(_speak, 600);
+        }
+      } catch(e) {}
+    }, 900);
+  }
+
+function sendPassViaWhatsApp() {
+  try {
+    var currentPass = localStorage.getItem('medea_adminPass') || '280876';
+    var now = new Date();
+    var tempCode = Math.floor(100000 + Math.random() * 900000);
+    var expiry = Date.now() + 10 * 60 * 1000;
+    localStorage.setItem('medea_tempCode', JSON.stringify({code: String(tempCode), expiry: expiry}));
+    var msg = '  2026%0A' +
+      '  : ' + currentPass + '%0A%0A' +
+      '  (10 ): ' + tempCode + '%0A' +
+      ': ' + now.toLocaleDateString('ar-DZ') + ' ' + now.toLocaleTimeString('ar-DZ') + '%0A' +
+      '     ';
+    window.open('https://wa.me/213783402428?text=' + msg, '_blank');
+    showToast('  ...', 'success');
+  } catch(e) { showToast('  ', 'error'); }
+}
+
+function toggleForgotPass() {
+  var p = document.getElementById('forgotPassPanel');
+  if(p) p.style.display = p.style.display === 'none' ? 'block' : 'none';
+}
+
 function logoutAdmin() {
   document.getElementById('adminPanel').classList.add('hidden');
   document.getElementById('adminLogin').classList.remove('hidden');
-  // تصفير الحقول
+  //  
   const an = document.getElementById('adminName'); if(an) an.value = '';
   const ac = document.getElementById('adminCode'); if(ac) ac.value = '';
   const sn = document.getElementById('subAdminName'); if(sn) sn.value = '';
-  // إعادة للتبويب الافتراضي
+  //   
   switchLoginTab('super');
   const settingsSection = document.getElementById('adminSettingsSection');
   if(settingsSection) settingsSection.style.display = 'none';
+  var cbOut = document.getElementById('clearDataBtn'); if(cbOut) cbOut.style.display = 'none';
   currentAdminName = '';
-  showToast('✓ خروج', 'info');
+  showToast(' ', 'info');
 }
 
 function safeShowReports() {
@@ -5944,48 +6074,50 @@ function emergencyClearData() {
 // ===== السائق =====
 function loginDriver() {
   const n = document.getElementById('driverName').value.trim();
-  if(!n) { showToast('⚠️ أدخل الاسم', 'error'); return; }
+  if(!n) { showToast('  ', 'error'); return; }
   
-  // التحقق من أن السائق مضاف في قائمة الموظفين
+  //        
   const staff = JSON.parse(localStorage.getItem('medea_staff') || '[]');
-  const isApprovedDriver = staff.some(s => s.name === n && s.role && s.role.includes('سائق'));
+  const isApprovedDriver = staff.some(s => s.name === n && s.role && s.role.includes(''));
   if(!isApprovedDriver) {
-    showToast('⚠️ أنت لست مسجلاً كسائق - يجب أن تضافك الإدارة أولاً', 'error');
+    showToast('     -     ', 'error');
     return;
   }
   
   currentDriver = n;
+  //     
+  try { localStorage.setItem('medea_lastDriver', n); } catch(e) {}
   
-  // البحث عن قطاع السائق في جدول الجمع
+  //       
   const sectors = JSON.parse(localStorage.getItem('medea_schedule') || '[]');
   const driverSectors = sectors.filter(s => s.driver && s.driver.trim() === n);
   
   if(driverSectors.length > 0) {
     const s = driverSectors[0];
-    currentDriverSector = s.num || s.name || 'غير محدد';
-    // عرض بطاقة هوية السائق
+    currentDriverSector = s.num || s.name || ' ';
+    //    
     const welcomeEl = document.getElementById('driverWelcomeName');
     const sectorEl  = document.getElementById('driverSectorDisplay');
     const zonesEl   = document.getElementById('driverSectorZones');
-    if(welcomeEl) welcomeEl.textContent = '🚛 ' + n;
-    if(sectorEl)  sectorEl.textContent = 'القطاع ' + currentDriverSector;
-    if(zonesEl)   zonesEl.textContent = '📍 ' + driverSectors.map(x=>x.name).join(' | ');
-    // عرض جدول اليوم للسائق
+    if(welcomeEl) welcomeEl.textContent = ' ' + n;
+    if(sectorEl)  sectorEl.textContent = ' ' + currentDriverSector;
+    if(zonesEl)   zonesEl.textContent = ' ' + driverSectors.map(x=>x.name).join(' | ');
+    //    
     renderDriverTodaySchedule(driverSectors);
   } else {
-    currentDriverSector = 'غير محدد';
+    currentDriverSector = ' ';
     const welcomeEl = document.getElementById('driverWelcomeName');
-    if(welcomeEl) welcomeEl.textContent = '🚛 ' + n;
+    if(welcomeEl) welcomeEl.textContent = ' ' + n;
     const sectorEl = document.getElementById('driverSectorDisplay');
-    if(sectorEl) sectorEl.textContent = 'لم يُحدد قطاع بعد';
+    if(sectorEl) sectorEl.textContent = '   ';
     const todayEl = document.getElementById('driverTodaySchedule');
-    if(todayEl) todayEl.innerHTML = '<p style="color:var(--text-light);font-size:0.85rem;text-align:center">لم تُضف إلى أي قطاع بعد — راجع الإدارة</p>';
+    if(todayEl) todayEl.innerHTML = '<p style="color:var(--text-light);font-size:0.85rem;text-align:center">      �  </p>';
   }
   
   document.getElementById('driverLogin').classList.remove('hidden');
   document.getElementById('driverLogin').style.display = 'none';
   document.getElementById('driverPanel').classList.remove('hidden');
-  showToast('✓ مرحباً ' + n, 'success');
+  showToast('  ' + n, 'success');
   renderDriverTasks();
 }
 
@@ -6404,12 +6536,12 @@ function updatePublicStats() {
 function exportExcel() {
   try {
     if(!allReports.length) {
-      showToast('⚠️ لا بيانات', 'error');
+      showToast('  ', 'error');
       return;
     }
     
-    let c = 'ID,التاريخ,الوقت,العنوان,GPS,الحالة,السائق,النوع,متكرر\n';
-    allReports.forEach(x => c += `${x.id},${x.date},${x.time},"${x.addr}",${x.gps},${x.status},${x.driverName||'-'},${x.wasteType},${x.recurring?'نعم':'لا'}\n`);
+    let c = 'ID,,,,GPS,,,,\n';
+    allReports.forEach(x => c += `${x.id},${x.date},${x.time},"${x.addr}",${x.gps},${x.status},${x.driverName||'-'},${x.wasteType},${x.recurring?'':''}\n`);
     
     const b = new Blob([c], {type:'text/csv'});
     const a = document.createElement('a');
@@ -6417,9 +6549,9 @@ function exportExcel() {
     a.download = 'archive_'+Date.now()+'.csv';
     a.click();
     
-    showToast('✅ تم التصدير', 'success');
+    showToast('  ', 'success');
   } catch(e) {
-    showToast('⚠️ خطأ في التصدير', 'error');
+    showToast('   ', 'error');
   }
 }
 
@@ -7156,8 +7288,8 @@ function calculateConversion() {
 
 // ===== تتبع الشاحنة =====
 function startTruckTracking() {
-  // نبقي هذه الدالة للتوافق الخلفي (تستخدمها صفحة التتبع المستقلة)
-  if(!currentDriver) { showToast('⚠️ يجب تسجيل الدخول أولاً', 'error'); return; }
+  //      (   )
+  if(!currentDriver) { showToast('    ', 'error'); return; }
   truckTrackingData = {
     active: true, driver: currentDriver,
     sector: currentDriverSector,
@@ -7168,7 +7300,7 @@ function startTruckTracking() {
   showPage('truckTracking');
   updateTruckTrackingUI();
   startGPSMonitoring();
-  showToast('✅ تم بدء التتبع المباشر', 'success');
+  showToast('    ', 'success');
 }
 
 // ===== التتبع المضمن في صفحة السائق =====
@@ -7898,7 +8030,7 @@ async function buildRealMapDataUrl(path, bins) {
     const minLat = Math.min(...allLats), maxLat = Math.max(...allLats);
     const minLng = Math.min(...allLngs), maxLng = Math.max(...allLngs);
 
-    // اختيار مستوى الزوم المناسب
+    //    
     let zoom = 15;
     const dLat = maxLat - minLat, dLng = maxLng - minLng;
     if(dLat > 0.05 || dLng > 0.05) zoom = 13;
@@ -7906,7 +8038,7 @@ async function buildRealMapDataUrl(path, bins) {
     else if(dLat > 0.005 || dLng > 0.005) zoom = 15;
     else zoom = 16;
 
-    // حساب نطاق tiles المطلوبة مع هامش
+    //   tiles   
     const padLat = Math.max(dLat * 0.25, 0.002);
     const padLng = Math.max(dLng * 0.25, 0.002);
     const t1 = latLngToTile(maxLat + padLat, minLng - padLng, zoom);
@@ -7915,7 +8047,7 @@ async function buildRealMapDataUrl(path, bins) {
     const txMin = Math.min(t1.x, t2.x), txMax = Math.max(t1.x, t2.x);
     const tyMin = Math.min(t1.y, t2.y), tyMax = Math.max(t1.y, t2.y);
 
-    // حد أقصى 6×4 tiles لتجنب بطء التحميل
+    //   6�4 tiles   
     const txCount = Math.min(txMax - txMin + 1, 6);
     const tyCount = Math.min(tyMax - tyMin + 1, 4);
     const TILE_SIZE = 256;
@@ -7925,11 +8057,11 @@ async function buildRealMapDataUrl(path, bins) {
     canvas.width = W; canvas.height = H;
     const ctx = canvas.getContext('2d');
 
-    // خلفية احتياطية (تظهر لو فشل تحميل tile)
+    //   (    tile)
     ctx.fillStyle = '#f0ede6';
     ctx.fillRect(0, 0, W, H);
 
-    // ===== تحميل tiles OSM بالتوازي =====
+    // =====  tiles OSM  =====
     const tilePromises = [];
     for(let ty = tyMin; ty < tyMin + tyCount; ty++) {
       for(let tx = txMin; tx < txMin + txCount; tx++) {
@@ -7943,7 +8075,7 @@ async function buildRealMapDataUrl(path, bins) {
           img.crossOrigin = 'anonymous';
           img.onload = () => { ctx.drawImage(img, dx, dy, TILE_SIZE, TILE_SIZE); resolve(); };
           img.onerror = () => {
-            // tile فشل: ارسم مستطيل رمادي فاتح
+            // tile :    
             ctx.fillStyle = '#e8e8e8';
             ctx.fillRect(dx, dy, TILE_SIZE, TILE_SIZE);
             ctx.strokeStyle = '#ccc'; ctx.lineWidth = 0.5;
@@ -7955,17 +8087,17 @@ async function buildRealMapDataUrl(path, bins) {
       }
     }
 
-    // انتظر تحميل جميع tiles (مع timeout 8 ثوانٍ)
+    //    tiles ( timeout 8 )
     await Promise.race([
       Promise.all(tilePromises),
       new Promise(r => setTimeout(r, 8000))
     ]);
 
-    // ===== دالة تحويل lat/lng → pixel على الـ canvas =====
+    // =====   lat/lng  pixel   canvas =====
     const originTL = tileToLatLng(txMin, tyMin, zoom);
     const originBR = tileToLatLng(txMin + txCount, tyMin + tyCount, zoom);
 
-    // استخدام Mercator صحيح
+    //  Mercator 
     function mercY(lat) {
       const latRad = lat * Math.PI / 180;
       return Math.log(Math.tan(Math.PI/4 + latRad/2));
@@ -7976,9 +8108,9 @@ async function buildRealMapDataUrl(path, bins) {
     const toX = lng => ((lng - originTL.lng) / lngRange) * W;
     const toY = lat => ((mercTop - mercY(lat)) / (mercTop - mercBot)) * H;
 
-    // ===== رسم خط المسار =====
+    // =====    =====
     if(path.length >= 2) {
-      // الخط الخارجي (أبيض) للتباين مع الخريطة
+      //   ()   
       ctx.strokeStyle = 'rgba(255,255,255,0.8)';
       ctx.lineWidth = 7;
       ctx.lineJoin = 'round'; ctx.lineCap = 'round';
@@ -7987,7 +8119,7 @@ async function buildRealMapDataUrl(path, bins) {
       for(let i=1; i<path.length; i++) ctx.lineTo(toX(getLng(path[i])), toY(getLat(path[i])));
       ctx.stroke();
 
-      // الخط الأخضر الرئيسي
+      //   
       ctx.strokeStyle = '#1B5E20';
       ctx.lineWidth = 4;
       ctx.beginPath();
@@ -7995,7 +8127,7 @@ async function buildRealMapDataUrl(path, bins) {
       for(let i=1; i<path.length; i++) ctx.lineTo(toX(getLng(path[i])), toY(getLat(path[i])));
       ctx.stroke();
 
-      // سهم الاتجاه
+      //  
       const mi = Math.floor(path.length / 2);
       const ax1 = toX(getLng(path[mi-1])), ay1 = toY(getLat(path[mi-1]));
       const ax2 = toX(getLng(path[mi])),   ay2 = toY(getLat(path[mi]));
@@ -8009,13 +8141,13 @@ async function buildRealMapDataUrl(path, bins) {
       ctx.restore();
     }
 
-    // ===== الحاويات =====
+    // =====  =====
     (bins||[]).forEach((b, i) => {
       const bx = toX(b.lng), by = toY(b.lat);
-      // ظل
+      // 
       ctx.beginPath(); ctx.arc(bx+1, by+1, 10, 0, Math.PI*2);
       ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.fill();
-      // دائرة
+      // 
       ctx.beginPath(); ctx.arc(bx, by, 10, 0, Math.PI*2);
       ctx.fillStyle = '#FF9800'; ctx.fill();
       ctx.strokeStyle = '#fff'; ctx.lineWidth = 2.5; ctx.stroke();
@@ -8024,7 +8156,7 @@ async function buildRealMapDataUrl(path, bins) {
       ctx.fillText(String(i+1), bx, by);
     });
 
-    // ===== نقطة البداية =====
+    // =====   =====
     const sx = toX(getLng(path[0])), sy = toY(getLat(path[0]));
     ctx.beginPath(); ctx.arc(sx+1, sy+1, 12, 0, Math.PI*2);
     ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.fill();
@@ -8033,9 +8165,9 @@ async function buildRealMapDataUrl(path, bins) {
     ctx.strokeStyle = '#fff'; ctx.lineWidth = 3; ctx.stroke();
     ctx.fillStyle = '#fff'; ctx.font = 'bold 12px Arial';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText('▶', sx, sy);
+    ctx.fillText('', sx, sy);
 
-    // ===== نقطة النهاية =====
+    // =====   =====
     const ex = toX(getLng(path[path.length-1])), ey = toY(getLat(path[path.length-1]));
     ctx.beginPath(); ctx.arc(ex+1, ey+1, 12, 0, Math.PI*2);
     ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.fill();
@@ -8044,9 +8176,9 @@ async function buildRealMapDataUrl(path, bins) {
     ctx.strokeStyle = '#fff'; ctx.lineWidth = 3; ctx.stroke();
     ctx.fillStyle = '#fff'; ctx.font = 'bold 12px Arial';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText('■', ex, ey);
+    ctx.fillText('', ex, ey);
 
-    // ===== مفتاح الخريطة =====
+    // =====   =====
     const lx = W - 145, ly = H - 90;
     ctx.fillStyle = 'rgba(255,255,255,0.93)';
     ctx.beginPath();
@@ -8055,9 +8187,9 @@ async function buildRealMapDataUrl(path, bins) {
     ctx.fill();
     ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1; ctx.stroke();
     const legendItems = [
-      {color:'#4CAF50', label:'نقطة البداية (S)'},
-      {color:'#f44336', label:'نقطة النهاية (E)'},
-      {color:'#FF9800', label:'موقع الحاوية'}
+      {color:'#4CAF50', label:'  (S)'},
+      {color:'#f44336', label:'  (E)'},
+      {color:'#FF9800', label:' '}
     ];
     legendItems.forEach((item, i) => {
       const iy = ly + 18 + i * 22;
@@ -8069,12 +8201,12 @@ async function buildRealMapDataUrl(path, bins) {
       ctx.fillText(item.label, lx+133, iy);
     });
 
-    // ===== حقوق OpenStreetMap =====
+    // =====  OpenStreetMap =====
     ctx.fillStyle = 'rgba(255,255,255,0.75)';
     ctx.fillRect(0, H-16, 200, 16);
     ctx.fillStyle = '#555'; ctx.font = '9px Arial';
     ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-    ctx.fillText('© OpenStreetMap contributors', 4, H-8);
+    ctx.fillText('� OpenStreetMap contributors', 4, H-8);
 
     return canvas.toDataURL('image/png');
   } catch(e) {
@@ -8086,10 +8218,10 @@ async function downloadPreviewPDF() {
   const sd = currentSectorData || {};
   const totalBins = (sd.bins||[]).reduce((s,b)=>s+(parseInt(b.count)||1),0);
 
-  // رسم الخريطة الحقيقية (OSM tiles + مسار) وتحويلها إلى PNG مضمّن في PDF
-  let mapHTML = '<div class="map-placeholder">⚠️ لا توجد نقاط مسار مسجّلة</div>';
+  //    (OSM tiles + )   PNG   PDF
+  let mapHTML = '<div class="map-placeholder">     </div>';
   if((sd.path||[]).length >= 2) {
-    showToast('⏳ جاري تحميل خريطة المسار...', 'info');
+    showToast('    ...', 'info');
     const dataUrl = await buildRealMapDataUrl(sd.path, sd.bins||[]);
     if(dataUrl) {
       mapHTML = '<img src="' + dataUrl + '" style="width:100%;max-width:175mm;display:block;margin:0 auto;border-radius:8px;border:1px solid #ccc"/>';
@@ -8109,7 +8241,7 @@ async function downloadPreviewPDF() {
   win.document.write(`<!DOCTYPE html>
 <html dir="rtl"><head>
 <meta charset="UTF-8">
-<title>تقرير مسار - ${sd.name||''}</title>
+<title>  - ${sd.name||''}</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -8120,7 +8252,7 @@ async function downloadPreviewPDF() {
     body { print-color-adjust:exact; -webkit-print-color-adjust:exact; }
   }
 
-  /* ===== هيدر مشترك ===== */
+  /* =====   ===== */
   .header {
     display:flex; align-items:center; justify-content:space-between;
     border-bottom:3px solid #006233; padding-bottom:8px; margin-bottom:12px;
@@ -8133,7 +8265,7 @@ async function downloadPreviewPDF() {
     border-radius:20px; font-size:11px; font-weight:700; white-space:nowrap;
   }
 
-  /* ===== جدول المعلومات ===== */
+  /* =====   ===== */
   .info-grid {
     display:grid; grid-template-columns:1fr 1fr; gap:0;
     border:1px solid #ddd; border-radius:6px; overflow:hidden; margin-bottom:12px;
@@ -8154,7 +8286,7 @@ async function downloadPreviewPDF() {
   .info-value.warn   { color:#E65100; font-weight:700; }
   .info-value.mono   { font-family:monospace; font-size:10px; }
 
-  /* ===== جدول الحاويات ===== */
+  /* =====   ===== */
   .section-title {
     color:#006233; font-size:13px; font-weight:800;
     border-right:4px solid #006233; padding-right:8px;
@@ -8167,7 +8299,7 @@ async function downloadPreviewPDF() {
   table.bins tbody tr:nth-child(even) { background:#f9fbe7; }
   table.bins tbody tr:hover { background:#e8f5e9; }
 
-  /* ===== شريط الإجمالي ===== */
+  /* =====   ===== */
   .total-bar {
     margin-top:10px; padding:9px 14px;
     background:linear-gradient(90deg,#006233,#008040);
@@ -8175,14 +8307,14 @@ async function downloadPreviewPDF() {
     font-size:12px; text-align:center; letter-spacing:0.3px;
   }
 
-  /* ===== فوتر ===== */
+  /* =====  ===== */
   .footer {
     margin-top:14px; text-align:center;
     border-top:1px solid #e0e0e0; padding-top:8px;
     color:#999; font-size:9px;
   }
 
-  /* ===== صفحة الخريطة ===== */
+  /* =====   ===== */
   .map-page {
     display:flex; flex-direction:column;
     align-items:center; justify-content:center;
@@ -8209,64 +8341,64 @@ async function downloadPreviewPDF() {
 </head><body>
 
 <!-- ============================================================ -->
-<!-- صفحة 1 : المعلومات + جدول الحاويات                          -->
+<!--  1 :  +                            -->
 <!-- ============================================================ -->
 
-<!-- هيدر -->
+<!--  -->
 <div class="header">
-  <div class="header-logo">🌿 مدينتي نظيفة 2026<br><span>تقرير مسار الشاحنات</span></div>
-  <div class="header-badge">${sd.name||'القطاع'}</div>
-  <div class="header-sub">النظام الوطني لإدارة النفايات<br>الجزائر 2026</div>
+  <div class="header-logo">   2026<br><span>  </span></div>
+  <div class="header-badge">${sd.name||''}</div>
+  <div class="header-sub">   <br> </div>
 </div>
 
-<!-- معلومات المسار في شبكة 2×N -->
+<!--     2�N -->
 <div class="info-grid">
-  <div class="info-label">🏷️ القطاع</div>       <div class="info-value accent">${sd.name||'-'}</div>
-  <div class="info-label">👤 السائق</div>       <div class="info-value">${sd.driver||'-'}</div>
-  ${sd.schedule ? `<div class="info-label">📍 الأحياء</div><div class="info-value" style="font-size:10px">${sd.schedule.name||'-'}</div>` : ''}
-  <div class="info-label">📅 التاريخ</div>       <div class="info-value">${sd.date||'-'}</div>
-  <div class="info-label">📍 عدد النقاط</div>    <div class="info-value accent">${(sd.path||[]).length}</div>
-  <div class="info-label">🗑️ إجمالي الحاويات</div><div class="info-value accent">${totalBins}</div>
-  <div class="info-label">⚖️ الكمية بالطن</div>  <div class="info-value warn">${sd.totalTons||'0.00'} طن</div>
-  <div class="info-label">🔖 رقم السند</div>      <div class="info-value mono">${sd.refNum||'-'}</div>
+  <div class="info-label"> </div>       <div class="info-value accent">${sd.name||'-'}</div>
+  <div class="info-label"> </div>       <div class="info-value">${sd.driver||'-'}</div>
+  ${sd.schedule ? `<div class="info-label"> </div><div class="info-value" style="font-size:10px">${sd.schedule.name||'-'}</div>` : ''}
+  <div class="info-label"> </div>       <div class="info-value">${sd.date||'-'}</div>
+  <div class="info-label">  </div>    <div class="info-value accent">${(sd.bins||[]).length}</div>
+  <div class="info-label">  </div><div class="info-value accent">${totalBins}</div>
+  <div class="info-label">  </div>  <div class="info-value warn">${sd.totalTons||'0.00'} </div>
+  <div class="info-label">  </div>      <div class="info-value mono">${sd.refNum||'-'}</div>
 </div>
 
-<!-- جدول الحاويات -->
-<div class="section-title">📋 جدول مواقع الحاويات</div>
+<!--   -->
+<div class="section-title">   </div>
 <table class="bins">
   <thead>
-    <tr><th>#</th><th>الوقت</th><th>العنوان</th><th>الإحداثيات</th><th>العدد</th></tr>
+    <tr><th>#</th><th></th><th></th><th></th><th></th></tr>
   </thead>
   <tbody>
-    ${binsRows||'<tr><td colspan="5" style="text-align:center;color:#888;padding:16px">لا توجد بيانات</td></tr>'}
+    ${binsRows||'<tr><td colspan="5" style="text-align:center;color:#888;padding:16px">  </td></tr>'}
   </tbody>
 </table>
-<div class="total-bar">🗑️ إجمالي: ${totalBins} حاوية &nbsp;|&nbsp; ⚖️ ${sd.totalTons||'0.00'} طن &nbsp;|&nbsp; 🔖 ${sd.refNum||'-'}</div>
+<div class="total-bar"> : ${totalBins}  &nbsp;|&nbsp;  ${sd.totalTons||'0.00'}  &nbsp;|&nbsp;  ${sd.refNum||'-'}</div>
 
 <div class="footer">
-  <p>إعداد: النظام الوطني لإدارة النفايات — الجزائر &nbsp;|&nbsp; تاريخ الطباعة: ${new Date().toLocaleDateString('ar-DZ')}</p>
+  <p>:     �   &nbsp;|&nbsp;  : ${new Date().toLocaleDateString('ar-DZ')}</p>
 </div>
 
 <!-- ============================================================ -->
-<!-- صفحة 2 : خريطة المسار كاملة                                 -->
+<!--  2 :                                    -->
 <!-- ============================================================ -->
 <div class="page-break"></div>
 
-<!-- هيدر مختصر -->
+<!--   -->
 <div class="header">
-  <div class="header-logo">🌿 مدينتي نظيفة 2026<br><span>خريطة المسار</span></div>
-  <div class="header-badge">${sd.name||'القطاع'} — ${sd.date||''}</div>
-  <div class="header-sub">النظام الوطني لإدارة النفايات<br>الجزائر 2026</div>
+  <div class="header-logo">   2026<br><span> </span></div>
+  <div class="header-badge">${sd.name||''} � ${sd.date||''}</div>
+  <div class="header-sub">   <br> </div>
 </div>
 
 <div class="map-page">
-  <div class="map-title">🗺️ خريطة المسار الميداني</div>
+  <div class="map-title">   </div>
   ${mapHTML}
-  <div class="map-ref">🔖 ${sd.refNum||'-'} &nbsp;|&nbsp; 👤 ${sd.driver||'-'} &nbsp;|&nbsp; 📅 ${sd.date||'-'}</div>
+  <div class="map-ref"> ${sd.refNum||'-'} &nbsp;|&nbsp;  ${sd.driver||'-'} &nbsp;|&nbsp;  ${sd.date||'-'}</div>
 </div>
 
 <div class="footer">
-  <p>إعداد: النظام الوطني لإدارة النفايات — الجزائر &nbsp;|&nbsp; تاريخ الطباعة: ${new Date().toLocaleDateString('ar-DZ')}</p>
+  <p>:     �   &nbsp;|&nbsp;  : ${new Date().toLocaleDateString('ar-DZ')}</p>
 </div>
 
 <script>
@@ -8562,9 +8694,9 @@ function loadStaffList() {
 }
 
 function addStaff() {
-  // التحقق من أن فتحي هو من يقوم بالإضافة
-  if(currentAdminName !== 'فتحي') {
-    showToast('⚠️ عذراً، المشرف فتحي هو الوحيد المخول بإضافة الموظفين', 'error');
+  //        
+  if(currentAdminName !== '') {
+    showToast('        ', 'error');
     return;
   }
   
@@ -8573,7 +8705,7 @@ function addStaff() {
   const p = document.getElementById('newStaffPhone').value.trim();
   
   if(!n || !r) {
-    showToast('⚠️ الاسم والمنصب مطلوبان', 'error');
+    showToast('   ', 'error');
     return;
   }
   
@@ -8587,30 +8719,30 @@ function addStaff() {
     name: n, 
     role: r, 
     phone: p, 
-    addedBy: 'فتحي', 
+    addedBy: '', 
     addedDate: new Date().toLocaleDateString('ar-DZ')
   });
   
   try { 
     localStorage.setItem('medea_staff', JSON.stringify(s)); 
-    // رفع إلى السحابة
+    //   
     try { db.ref('staff').set(s).catch(()=>{}); } catch(e) {}
-    // تصفير الخانات بعد الحفظ الناجح
+    //     
     document.getElementById('newStaffName').value = '';
     document.getElementById('newStaffRole').value = '';
     document.getElementById('newStaffPhone').value = '';
     
     loadStaffList();
-    showToast('✅ تم إضافة ' + n + ' بنجاح', 'success');
+    showToast('   ' + n + ' ', 'success');
   } catch(e) {
-    showToast('⚠️ فشل حفظ البيانات في المتصفح', 'error');
+    showToast('     ', 'error');
   }
 }
 
 function editStaff(i) {
-  // فقط فتحي يمكنه تعديل الموظفين
-  if(currentAdminName !== 'فتحي') {
-    showToast('⚠️ فقط فتحي يمكنه تعديل الموظفين', 'error');
+  //     
+  if(currentAdminName !== '') {
+    showToast('     ', 'error');
     return;
   }
   
@@ -8618,31 +8750,31 @@ function editStaff(i) {
   try { s = JSON.parse(localStorage.getItem('medea_staff') || '[]'); } catch(e) {}
   
   const st = s[i];
-  const nn = prompt('الاسم الجديد:', st.name);
+  const nn = prompt(' :', st.name);
   if(!nn) return;
   
-  const nr = prompt('المنصب الجديد:', st.role);
+  const nr = prompt(' :', st.role);
   if(!nr) return;
   
-  const np = prompt('الهاتف الجديد:', st.phone || '');
+  const np = prompt(' :', st.phone || '');
   
-  s[i] = {name: nn, role: nr, phone: np, addedBy: st.addedBy || 'فتحي', addedDate: st.addedDate || new Date().toLocaleDateString('ar-DZ')};
+  s[i] = {name: nn, role: nr, phone: np, addedBy: st.addedBy || '', addedDate: st.addedDate || new Date().toLocaleDateString('ar-DZ')};
   try {
     localStorage.setItem('medea_staff', JSON.stringify(s));
     try { db.ref('staff').set(s).catch(()=>{}); } catch(e) {}
   } catch(e) {}
   loadStaffList();
-  showToast('✅ تم التعديل بواسطة فتحي', 'success');
+  showToast('    ', 'success');
 }
 
 function deleteStaff(i) {
-  // فقط فتحي يمكنه حذف الموظفين
-  if(currentAdminName !== 'فتحي') {
-    showToast('⚠️ فقط فتحي يمكنه حذف الموظفين', 'error');
+  //     
+  if(currentAdminName !== '') {
+    showToast('     ', 'error');
     return;
   }
   
-  if(!confirm('حذف الموظف؟')) return;
+  if(!confirm(' ')) return;
   
   let s = [];
   try { s = JSON.parse(localStorage.getItem('medea_staff') || '[]'); } catch(e) {}
@@ -8652,7 +8784,7 @@ function deleteStaff(i) {
     try { db.ref('staff').set(s).catch(()=>{}); } catch(e) {}
   } catch(e) {}
   loadStaffList();
-  showToast('✅ تم الحذف بواسطة فتحي', 'success');
+  showToast('    ', 'success');
 }
 
 function manageStaffPage() {
@@ -8821,8 +8953,8 @@ function updateDriversLivePanel() {
 
 // ===== [5] تقرير يومي تلقائي PDF =====
 function generateDailyReport() {
-  if(typeof html2pdf === 'undefined') { showToast('⚠️ المكتبة غير محملة', 'error'); return; }
-  showToast('📥 جاري إنشاء التقرير اليومي...', 'info');
+  if(typeof html2pdf === 'undefined') { showToast('   ', 'error'); return; }
+  showToast('    ...', 'info');
 
   try {
     const today = new Date().toLocaleDateString('ar-DZ');
@@ -8834,7 +8966,7 @@ function generateDailyReport() {
     const doneReports = allReports.filter(r => r.status==='done');
     const newReports  = allReports.filter(r => r.status==='new');
     const staff = (function(){try{return JSON.parse(localStorage.getItem('medea_staff')||'[]')}catch(e){return []}}());
-    const drivers = staff.filter(s => s.role && s.role.includes('سائق'));
+    const drivers = staff.filter(s => s.role && s.role.includes(''));
     const totalBins = truckTrackingData.collectedBins ? truckTrackingData.collectedBins.reduce((s,b)=>s+(parseInt(b.count)||1),0) : 0;
 
     const row = (label, val, color='#000') =>
@@ -8842,62 +8974,62 @@ function generateDailyReport() {
 
     const driversRows = drivers.length
       ? drivers.map(d => `<tr><td style="padding:7px;border:1px solid #ddd">${d.name}</td><td style="padding:7px;border:1px solid #ddd">${d.role}</td><td style="padding:7px;border:1px solid #ddd">${d.phone||'-'}</td></tr>`).join('')
-      : '<tr><td colspan="3" style="padding:8px;text-align:center;color:#999">لا يوجد سائقون مسجلون</td></tr>';
+      : '<tr><td colspan="3" style="padding:8px;text-align:center;color:#999">   </td></tr>';
 
     const sectorsRows = sectors.length
       ? sectors.map(s => `<tr><td style="padding:7px;border:1px solid #ddd">${s.num||'-'}</td><td style="padding:7px;border:1px solid #ddd">${s.name}</td><td style="padding:7px;border:1px solid #ddd">${s.days}</td><td style="padding:7px;border:1px solid #ddd">${s.truckType||'-'}</td><td style="padding:7px;border:1px solid #ddd">${s.driver||'-'}</td></tr>`).join('')
-      : '<tr><td colspan="5" style="padding:8px;text-align:center;color:#999">لا توجد قطاعات</td></tr>';
+      : '<tr><td colspan="5" style="padding:8px;text-align:center;color:#999">  </td></tr>';
 
     const div = document.createElement('div');
     div.style.cssText = 'position:fixed;top:0;left:0;width:190mm;padding:22px;background:#fff;z-index:-9999;font-family:Cairo,sans-serif;direction:rtl;color:#000';
     div.innerHTML = `
       <div style="text-align:center;border-bottom:3px solid #006233;padding-bottom:14px;margin-bottom:18px">
-        <div style="font-size:2.5rem">🌿</div>
-        <h1 style="color:#006233;margin:4px 0;font-size:22px">مدينتي نظيفة 2026</h1>
-        <p style="color:#666;font-size:12px;margin:2px 0">التقرير اليومي الآلي — مدينتي نظيفة 🇩🇿</p>
-        <p style="color:#006233;font-weight:700;font-size:13px">📅 ${today}</p>
+        <div style="font-size:2.5rem"></div>
+        <h1 style="color:#006233;margin:4px 0;font-size:22px">  2026</h1>
+        <p style="color:#666;font-size:12px;margin:2px 0">   �    </p>
+        <p style="color:#006233;font-weight:700;font-size:13px"> ${today}</p>
       </div>
 
-      <h3 style="color:#006233;border-right:4px solid #006233;padding-right:8px;margin:14px 0 8px">📊 ملخص اليوم</h3>
+      <h3 style="color:#006233;border-right:4px solid #006233;padding-right:8px;margin:14px 0 8px">  </h3>
       <table style="width:100%;border-collapse:collapse;font-size:12px">
-        ${row('إجمالي البلاغات', allReports.length)}
-        ${row('بلاغات منجزة', doneReports.length, '#2E7D32')}
-        ${row('بلاغات جديدة معلّقة', newReports.length, newReports.length>0?'#C62828':'#2E7D32')}
-        ${row('إجمالي الحاويات المجمّعة', totalBins + ' حاوية', '#1565C0')}
-        ${row('كميات مفرزة اليوم', totalTons.toFixed(2) + ' طن', '#E65100')}
-        ${row('عدد القطاعات النشطة', sectors.length)}
-        ${row('عدد السائقين المسجلين', drivers.length)}
+        ${row(' ', allReports.length)}
+        ${row(' ', doneReports.length, '#2E7D32')}
+        ${row('  ', newReports.length, newReports.length>0?'#C62828':'#2E7D32')}
+        ${row('  ', totalBins + ' ', '#1565C0')}
+        ${row('  ', totalTons.toFixed(2) + ' ', '#E65100')}
+        ${row('  ', sectors.length)}
+        ${row('  ', drivers.length)}
       </table>
 
-      <h3 style="color:#006233;border-right:4px solid #006233;padding-right:8px;margin:18px 0 8px">🚛 السائقون</h3>
+      <h3 style="color:#006233;border-right:4px solid #006233;padding-right:8px;margin:18px 0 8px"> </h3>
       <table style="width:100%;border-collapse:collapse;font-size:11px">
-        <thead><tr style="background:#006233;color:#fff"><th style="padding:7px">الاسم</th><th style="padding:7px">المنصب</th><th style="padding:7px">الهاتف</th></tr></thead>
+        <thead><tr style="background:#006233;color:#fff"><th style="padding:7px"></th><th style="padding:7px"></th><th style="padding:7px"></th></tr></thead>
         <tbody>${driversRows}</tbody>
       </table>
 
-      <h3 style="color:#006233;border-right:4px solid #006233;padding-right:8px;margin:18px 0 8px">📋 جدول القطاعات</h3>
+      <h3 style="color:#006233;border-right:4px solid #006233;padding-right:8px;margin:18px 0 8px">  </h3>
       <table style="width:100%;border-collapse:collapse;font-size:10px">
-        <thead><tr style="background:#006233;color:#fff"><th style="padding:6px">#</th><th style="padding:6px">الأحياء</th><th style="padding:6px">الأيام</th><th style="padding:6px">نوع الشاحنة</th><th style="padding:6px">السائق</th></tr></thead>
+        <thead><tr style="background:#006233;color:#fff"><th style="padding:6px">#</th><th style="padding:6px"></th><th style="padding:6px"></th><th style="padding:6px"> </th><th style="padding:6px"></th></tr></thead>
         <tbody>${sectorsRows}</tbody>
       </table>
 
       <div style="margin-top:20px;text-align:center;border-top:2px solid #006233;padding-top:10px;color:#666;font-size:10px">
-        <p>إعداد آلي: نظام مدينتي نظيفة 2026 — النظام الوطني لإدارة النفايات البلدية</p>
-        <p>تاريخ الطباعة: ${today} — ${new Date().toLocaleTimeString('ar-DZ')}</p>
+        <p> :    2026 �     -  </p>
+        <p> : ${today} � ${new Date().toLocaleTimeString('ar-DZ')}</p>
       </div>`;
 
     document.body.appendChild(div);
     html2pdf().from(div).set({
       margin:[8,8,8,8],
-      filename:'تقرير_يومي_' + todayISO + '.pdf',
+      filename:'__' + todayISO + '.pdf',
       html2canvas:{scale:2,useCORS:true,logging:false,backgroundColor:'#ffffff'},
       jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
     }).save().then(() => {
       document.body.removeChild(div);
-      showToast('✅ تم تحميل التقرير اليومي', 'success');
+      showToast('    ', 'success');
     });
   } catch(err) {
-    showToast('⚠️ خطأ في التقرير: ' + err.message, 'error');
+    showToast('   : ' + err.message, 'error');
   }
 }
 
